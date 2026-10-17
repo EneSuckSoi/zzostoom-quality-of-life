@@ -1,0 +1,130 @@
+# zzostoom Quality of Life - zh translation. English<TAB>translation, one per line.
+# Keep %d / %s / %.1f in the same order; \n is a line break. Run tools/gen_lang.py after editing.
+Camera	镜头
+Combat HUD	战斗HUD
+Controls	操作
+Performance	性能
+Misc	其他
+Settings	设置
+Reset	重置
+Status:	状态：
+Status: %s	状态：%s
+Camera adjustments	镜头调整
+Edits the game's camera table (LockCamParam) in memory. Nothing is saved to regulation.bin, so it works with any regulation mod and with Seamless Co-op.	在内存中修改游戏的镜头表（LockCamParam）。不会写入 regulation.bin，因此可与任何 regulation 模组及 Seamless Co-op 一起使用。
+View	视角
+Distance	距离
+How far behind the character the camera sits (x the game's own distance, which differs per situation: on foot, on Torrent, in some boss arenas...).	镜头在角色身后的距离（游戏原本距离的倍数，原本距离随情况不同：步行、骑灵马、部分首领战场地等）。
+Field of view	视野
+%+.0f deg	%+.0f°
+Added to the game's vertical field of view (48 deg on foot).	加到游戏的垂直视野上（步行时为48°）。
+Height	高度
+Raises or lowers the point the camera looks at (1.45 m above the feet on foot).	升高或降低镜头注视的点（步行时为脚部上方1.45米）。
+Lock-on	锁定
+Lock-on range	锁定距离
+Distance at which you can lock on (15 m on foot, more for some bosses).	可以锁定的距离（步行时15米，部分首领更远）。
+Lock-on camera tilt	锁定时镜头倾斜
+How much the camera pitches toward a locked target. Lower values keep the camera level against tall bosses or enemies above / below you.	镜头向锁定目标俯仰的幅度。数值越低，面对高大首领或上下方的敌人时镜头越保持水平。
+Also in the game's own settings	游戏本身的设置中也有
+System > Camera Options has two switches for the camera fighting you:\n  - Camera Auto Wall Recovery: the camera swings away from walls by itself.\n  - Camera Auto Rotation: the camera turns while you walk left / right.\nTurn both Off to keep the camera where you put it.	系统 > 镜头选项中有两个开关可防止镜头自己乱动：\n  - 靠墙时镜头自动修正：镜头会自己从墙边移开。\n  - 镜头自动旋转：左右行走时镜头会跟着转。\n两者都关闭后，镜头会停在你摆放的位置。
+Stance (poise) bars	架势条
+Enemy bars	敌人架势条
+A bar above every enemy you are fighting. It fills up as you break its stance; when it is full the enemy staggers (bosses kneel for a critical hit).	在每个交战敌人头上显示一条架势条。破坏其架势时会增长，满了敌人就会踉跄（首领会跪地，可以发动致命一击）。
+Focus bar (top of the screen)	焦点条（屏幕顶部）
+A large bar for the enemy that was hit most recently: good for bosses.	为最近击中的敌人显示一条大的架势条，适合首领战。
+My own bar (bottom of the screen)	自己的架势条（屏幕底部）
+Your poise: when it fills up, you get staggered. Shown only while it is damaged.	你的强韧度：满了就会踉跄。只在受损时显示。
+Enemy HP numbers	敌人HP数值
+Buffs	增益
+Buff timers	增益计时
+Time left on your active buffs (Golden Vow, Flame Grant Me Strength, crystal tears, boluses...).	当前增益的剩余时间（祷告、结晶露滴、药丸等）。
+Also buffs without a known name	也显示未知名称的增益
+ok	正常
+ok (estimating time left)	正常（剩余时间为估算）
+Layout	布局
+HUD size	HUD大小
+Bar height above enemies	敌人头顶条的高度
+Max. distance	最大距离
+Preview (example bars on screen)	预览（示例条）
+Instant roll	即时翻滚
+Elden Ring rolls when you RELEASE the dodge button, because holding it means sprint. With this on, the roll starts the moment you press; keep holding to sprint afterwards.	艾尔登法环在“松开”闪避键时才翻滚，因为按住是冲刺。开启后按下的瞬间就翻滚，继续按住则随后冲刺。
+Roll on press	按下即翻滚
+Dodge button	闪避键
+The controller button your game uses for "Backstep, Dodge Roll, Dash" (B / Circle by default).	游戏中“后跳、翻滚、冲刺”所用的手柄按键（默认 B / ○）。
+Sprint after	冲刺延迟
+Keep the button held this long after pressing to start sprinting.	按下后持续按住这么久就开始冲刺。
+Minimum sprint	最短冲刺
+A sprint started by the mod is held at least this long, so that letting go is not read as a second tap (= a second roll) by the game. Raise it if you sometimes get a double roll when releasing a short sprint.	由模组开始的冲刺至少保持这么久，以免松开时被游戏当成第二次按键（= 第二次翻滚）。如果松开短暂冲刺时偶尔会翻滚两次，请调高此值。
+Not active on Torrent, in this menu or while L3 / R3 is held (cheat sheet shortcuts).	骑乘灵马时、本菜单打开时、按住 L3 / R3 时（cheat sheet 快捷键）不生效。
+Controller: %s	手柄：%s
+hooked	已接管
+not available	不可用
+Frame rate	帧率
+Unlock the frame rate	解锁帧率
+Removes the 60 FPS limit. Works in exclusive fullscreen, borderless and windowed mode and with Seamless Co-op.	移除60 FPS上限。适用于独占全屏、无边框和窗口模式，也支持 Seamless Co-op。
+auto (%d FPS)	自动（%d FPS）
+FPS limit	FPS上限
+0 = your monitor's refresh rate. Changes apply immediately.	0 = 显示器刷新率。更改立即生效。
+auto (%d Hz)	自动（%d Hz）
+Fullscreen refresh rate	全屏刷新率
+The refresh rate requested in exclusive fullscreen (the game forces 60 Hz). Applies the next time the game switches to fullscreen (restart, or change the screen mode in the game's settings).	独占全屏时请求的刷新率（游戏强制为60 Hz）。在下次切换到全屏时生效（重启游戏，或在游戏设置中更改显示模式）。
+FPS counter	FPS计数器
+Now: %.0f FPS (%.1f ms)	当前：%.0f FPS（%.1f ms）
+Pause	暂停
+Pause key	暂停键
+Freezes the game (enemies, timers, everything) until you press it again. Only when you are alone in your world: with Seamless Co-op partners it does nothing.	冻结游戏（敌人、计时器等一切），直到再次按下。仅在你独自处于自己的世界时有效：有 Seamless Co-op 队友时不起作用。
+Keyboard	键盘
+Resume now	立即继续
+Pause now	立即暂停
+Sound	声音
+Mute when the game is in the background	游戏在后台时静音
+Alt-Tab / another window in front: the game goes silent until you come back.	Alt-Tab / 其他窗口在前台时，游戏会静音直到你回来。
+hold View	长按 View
+keyboard only	仅键盘
+Hold View to open or close the menu; a short tap still opens the map. Start also closes it. LB / RB switch tabs.	长按 View 打开或关闭菜单；短按仍会打开地图。Start 也可关闭。LB / RB 切换标签页。
+View + Start together opens it, Start closes it. LB / RB switch tabs.	同时按 View + Start 打开，按 Start 关闭。LB / RB 切换标签页。
+Click both sticks (L3 + R3) to open or close it. LB / RB switch tabs.	同时按下两个摇杆（L3 + R3）打开或关闭。LB / RB 切换标签页。
+No controller shortcut: use the keyboard key.	无手柄快捷键：请使用键盘按键。
+Hold View	长按 View
+None	无
+Language	语言
+Menu language	菜单语言
+Menu	菜单
+Menu key (keyboard)	菜单键（键盘）
+Menu shortcut (controller)	菜单快捷键（手柄）
+Hold time	长按时间
+Text size	文字大小
+Block game keyboard/mouse input while the menu is open	菜单打开时屏蔽游戏的键盘/鼠标输入
+Show a short hint when the game starts	游戏启动时显示简短提示
+About	关于
+No Cheat Engine needed; loaded by Mod Engine 3 as a DLL. Game objects are found by their class names (RTTI), not fixed addresses. Changes are made in memory only. UI: Dear ImGui, hooks: MinHook. Log: zzostoom_qol.log next to the DLL.	无需 Cheat Engine；由 Mod Engine 3 作为 DLL 加载。游戏对象通过类名（RTTI）查找，而不是固定地址。所有修改只在内存中进行。界面：Dear ImGui，钩子：MinHook。日志：DLL 旁的 zzostoom_qol.log。
+zzostoom Quality of Life ready  -  menu: %s / %s	zzostoom Quality of Life 已就绪  -  菜单：%s / %s
+No character loaded: most features start once you are in game.	未载入角色：大多数功能在进入游戏后开始工作。
+PAUSED	已暂停
+%s or R3 + Start to resume	按 %s 或 R3 + Start 继续
+HP %s     Stance %.0f / %.0f	HP %s     架势 %.0f / %.0f
+HP 3840 / 6000     Stance 34 / 120	HP 3840 / 6000     架势 34 / 120
+UnlockTheFps.dll is loaded and handles the frame rate (remove it from the ME3 profile to use this one)	已加载 UnlockTheFps.dll 并由它控制帧率（要使用本功能，请将其从 ME3 配置中移除）
+frame limiter not found (game updated?)	未找到帧率限制器（游戏已更新？）
+off (game default 60 FPS)	关闭（游戏默认60 FPS）
+limit %d FPS, fullscreen %d Hz	上限 %d FPS，全屏 %d Hz
+waiting for the game	等待游戏
+camera table not found yet	尚未找到镜头表
+applied	已应用
+restored	已恢复
+%s: %d camera rows (normal camera: %.1f m, FOV %.0f)	%s：%d 行镜头参数（普通镜头：%.1f 米，FOV %.0f）
+ready	就绪
+not in game	不在游戏中
+not available while other players are in your world	有其他玩家在你的世界时不可用
+frame timer not found (game updated?)	未找到帧计时器（游戏已更新？）
+paused	已暂停
+waiting	等待中
+muted (game in background)	已静音（游戏在后台）
+audio devices not available	音频设备不可用
+no audio session of the game found yet	尚未找到游戏的音频会话
+playing	播放中
+resumed (loading / another player joined)	已继续（读取中 / 有玩家加入）
+effect table not found yet	尚未找到效果表
+effect list empty	效果列表为空
+effect list not found	未找到效果列表
+learning the effect list layout	正在分析效果列表结构
+Effect	效果

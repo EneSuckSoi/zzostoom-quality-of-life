@@ -1,0 +1,130 @@
+# zzostoom Quality of Life - de translation. English<TAB>translation, one per line.
+# Keep %d / %s / %.1f in the same order; \n is a line break. Run tools/gen_lang.py after editing.
+Camera	Kamera
+Combat HUD	Kampf-HUD
+Controls	Steuerung
+Performance	Leistung
+Misc	Sonstiges
+Settings	Einstellungen
+Reset	Zurücksetzen
+Status:	Status:
+Status: %s	Status: %s
+Camera adjustments	Kameraanpassungen
+Edits the game's camera table (LockCamParam) in memory. Nothing is saved to regulation.bin, so it works with any regulation mod and with Seamless Co-op.	Ändert die Kameratabelle des Spiels (LockCamParam) im Speicher. In regulation.bin wird nichts gespeichert, daher funktioniert es mit jeder Regulation-Mod und mit Seamless Co-op.
+View	Ansicht
+Distance	Abstand
+How far behind the character the camera sits (x the game's own distance, which differs per situation: on foot, on Torrent, in some boss arenas...).	Wie weit die Kamera hinter der Figur ist (x der Abstand des Spiels, der je nach Situation variiert: zu Fuß, auf Sturmwind, in manchen Bossarenen ...).
+Field of view	Sichtfeld
+%+.0f deg	%+.0f°
+Added to the game's vertical field of view (48 deg on foot).	Wird zum vertikalen Sichtfeld des Spiels addiert (zu Fuß 48°).
+Height	Höhe
+Raises or lowers the point the camera looks at (1.45 m above the feet on foot).	Hebt oder senkt den Punkt, auf den die Kamera schaut (zu Fuß 1,45 m über den Füßen).
+Lock-on	Anvisieren
+Lock-on range	Anvisier-Reichweite
+Distance at which you can lock on (15 m on foot, more for some bosses).	Entfernung, ab der du anvisieren kannst (zu Fuß 15 m, bei manchen Bossen mehr).
+Lock-on camera tilt	Kameraneigung beim Anvisieren
+How much the camera pitches toward a locked target. Lower values keep the camera level against tall bosses or enemies above / below you.	Wie stark die Kamera zum anvisierten Ziel kippt. Niedrigere Werte halten die Kamera bei großen Bossen oder Gegnern über / unter dir waagerecht.
+Also in the game's own settings	Auch in den Einstellungen des Spiels
+System > Camera Options has two switches for the camera fighting you:\n  - Camera Auto Wall Recovery: the camera swings away from walls by itself.\n  - Camera Auto Rotation: the camera turns while you walk left / right.\nTurn both Off to keep the camera where you put it.	Unter System > Kameraoptionen gibt es zwei Schalter gegen eigenwillige Kamerabewegungen:\n  - Automatische Kamerakorrektur an Wänden: die Kamera schwenkt von selbst von Wänden weg.\n  - Automatische Kameradrehung: die Kamera dreht sich, wenn du nach links / rechts läufst.\nSchalte beide aus, damit die Kamera bleibt, wo du sie hinstellst.
+Stance (poise) bars	Haltungsbalken
+Enemy bars	Gegnerbalken
+A bar above every enemy you are fighting. It fills up as you break its stance; when it is full the enemy staggers (bosses kneel for a critical hit).	Ein Balken über jedem Gegner, den du bekämpfst. Er füllt sich, wenn du seine Haltung brichst; ist er voll, taumelt der Gegner (Bosse gehen für einen kritischen Treffer in die Knie).
+Focus bar (top of the screen)	Fokusbalken (oben)
+A large bar for the enemy that was hit most recently: good for bosses.	Ein großer Balken für den zuletzt getroffenen Gegner: ideal für Bosse.
+My own bar (bottom of the screen)	Eigener Balken (unten)
+Your poise: when it fills up, you get staggered. Shown only while it is damaged.	Deine Robustheit: ist der Balken voll, taumelst du. Wird nur angezeigt, solange sie beschädigt ist.
+Enemy HP numbers	HP-Zahlen der Gegner
+Buffs	Buffs
+Buff timers	Buff-Timer
+Time left on your active buffs (Golden Vow, Flame Grant Me Strength, crystal tears, boluses...).	Restzeit deiner aktiven Buffs (Anrufungen, Kristalltränen, Boli ...).
+Also buffs without a known name	Auch Buffs ohne bekannten Namen
+ok	OK
+ok (estimating time left)	OK (Restzeit geschätzt)
+Layout	Darstellung
+HUD size	HUD-Größe
+Bar height above enemies	Balkenhöhe über Gegnern
+Max. distance	Max. Entfernung
+Preview (example bars on screen)	Vorschau (Beispielbalken)
+Instant roll	Sofortige Rolle
+Elden Ring rolls when you RELEASE the dodge button, because holding it means sprint. With this on, the roll starts the moment you press; keep holding to sprint afterwards.	Elden Ring rollt erst beim LOSLASSEN der Ausweichtaste, weil Halten Sprinten bedeutet. Mit dieser Option startet die Rolle sofort beim Drücken; halte weiter gedrückt, um danach zu sprinten.
+Roll on press	Rolle beim Drücken
+Dodge button	Ausweichtaste
+The controller button your game uses for "Backstep, Dodge Roll, Dash" (B / Circle by default).	Die Controllertaste, die dein Spiel für „Rückschritt, Ausweichrolle, Sprint“ nutzt (standardmäßig B / Kreis).
+Sprint after	Sprinten nach
+Keep the button held this long after pressing to start sprinting.	So lange nach dem Drücken gedrückt halten, um zu sprinten.
+Minimum sprint	Mindest-Sprint
+A sprint started by the mod is held at least this long, so that letting go is not read as a second tap (= a second roll) by the game. Raise it if you sometimes get a double roll when releasing a short sprint.	Ein vom Mod gestarteter Sprint wird mindestens so lange gehalten, damit das Loslassen nicht als zweiter Tastendruck (= zweite Rolle) gilt. Erhöhe den Wert, falls du beim Loslassen eines kurzen Sprints manchmal doppelt rollst.
+Not active on Torrent, in this menu or while L3 / R3 is held (cheat sheet shortcuts).	Nicht aktiv auf Sturmwind, in diesem Menü oder solange L3 / R3 gehalten wird (Cheat-Sheet-Kürzel).
+Controller: %s	Controller: %s
+hooked	verbunden
+not available	nicht verfügbar
+Frame rate	Bildrate
+Unlock the frame rate	Bildrate freischalten
+Removes the 60 FPS limit. Works in exclusive fullscreen, borderless and windowed mode and with Seamless Co-op.	Entfernt die 60-FPS-Grenze. Funktioniert im exklusiven Vollbild, randlos und im Fenster sowie mit Seamless Co-op.
+auto (%d FPS)	auto (%d FPS)
+FPS limit	FPS-Grenze
+0 = your monitor's refresh rate. Changes apply immediately.	0 = Bildwiederholrate deines Monitors. Änderungen gelten sofort.
+auto (%d Hz)	auto (%d Hz)
+Fullscreen refresh rate	Vollbild-Bildwiederholrate
+The refresh rate requested in exclusive fullscreen (the game forces 60 Hz). Applies the next time the game switches to fullscreen (restart, or change the screen mode in the game's settings).	Die im exklusiven Vollbild angeforderte Bildwiederholrate (das Spiel erzwingt 60 Hz). Gilt beim nächsten Wechsel ins Vollbild (Neustart oder Bildschirmmodus in den Spieleinstellungen ändern).
+FPS counter	FPS-Anzeige
+Now: %.0f FPS (%.1f ms)	Aktuell: %.0f FPS (%.1f ms)
+Pause	Pause
+Pause key	Pausetaste
+Freezes the game (enemies, timers, everything) until you press it again. Only when you are alone in your world: with Seamless Co-op partners it does nothing.	Friert das Spiel ein (Gegner, Timer, alles), bis du erneut drückst. Nur wenn du allein in deiner Welt bist: mit Seamless-Co-op-Partnern passiert nichts.
+Keyboard	Tastatur
+Resume now	Jetzt fortsetzen
+Pause now	Jetzt pausieren
+Sound	Ton
+Mute when the game is in the background	Stummschalten, wenn das Spiel im Hintergrund ist
+Alt-Tab / another window in front: the game goes silent until you come back.	Alt-Tab / anderes Fenster im Vordergrund: das Spiel ist stumm, bis du zurückkommst.
+hold View	View halten
+keyboard only	nur Tastatur
+Hold View to open or close the menu; a short tap still opens the map. Start also closes it. LB / RB switch tabs.	View halten öffnet oder schließt das Menü; kurzes Tippen öffnet weiterhin die Karte. Start schließt es ebenfalls. LB / RB wechseln die Reiter.
+View + Start together opens it, Start closes it. LB / RB switch tabs.	View + Start zusammen öffnet es, Start schließt es. LB / RB wechseln die Reiter.
+Click both sticks (L3 + R3) to open or close it. LB / RB switch tabs.	Beide Sticks drücken (L3 + R3) öffnet oder schließt es. LB / RB wechseln die Reiter.
+No controller shortcut: use the keyboard key.	Kein Controller-Kürzel: nutze die Tastaturtaste.
+Hold View	View halten
+None	Keins
+Language	Sprache
+Menu language	Menüsprache
+Menu	Menü
+Menu key (keyboard)	Menütaste (Tastatur)
+Menu shortcut (controller)	Menükürzel (Controller)
+Hold time	Haltedauer
+Text size	Textgröße
+Block game keyboard/mouse input while the menu is open	Tastatur/Maus fürs Spiel sperren, solange das Menü offen ist
+Show a short hint when the game starts	Beim Spielstart kurzen Hinweis zeigen
+About	Info
+No Cheat Engine needed; loaded by Mod Engine 3 as a DLL. Game objects are found by their class names (RTTI), not fixed addresses. Changes are made in memory only. UI: Dear ImGui, hooks: MinHook. Log: zzostoom_qol.log next to the DLL.	Kein Cheat Engine nötig; wird von Mod Engine 3 als DLL geladen. Spielobjekte werden über ihre Klassennamen (RTTI) gefunden, nicht über feste Adressen. Änderungen erfolgen nur im Speicher. UI: Dear ImGui, Hooks: MinHook. Log: zzostoom_qol.log neben der DLL.
+zzostoom Quality of Life ready  -  menu: %s / %s	zzostoom Quality of Life bereit  -  Menü: %s / %s
+No character loaded: most features start once you are in game.	Kein Charakter geladen: die meisten Funktionen starten, sobald du im Spiel bist.
+PAUSED	PAUSIERT
+%s or R3 + Start to resume	%s oder R3 + Start zum Fortsetzen
+HP %s     Stance %.0f / %.0f	HP %s     Haltung %.0f / %.0f
+HP 3840 / 6000     Stance 34 / 120	HP 3840 / 6000     Haltung 34 / 120
+UnlockTheFps.dll is loaded and handles the frame rate (remove it from the ME3 profile to use this one)	UnlockTheFps.dll ist geladen und regelt die Bildrate (entferne es aus dem ME3-Profil, um diese Funktion zu nutzen)
+frame limiter not found (game updated?)	Bildratenbegrenzer nicht gefunden (Spiel aktualisiert?)
+off (game default 60 FPS)	aus (Spielstandard 60 FPS)
+limit %d FPS, fullscreen %d Hz	Grenze %d FPS, Vollbild %d Hz
+waiting for the game	warte auf das Spiel
+camera table not found yet	Kameratabelle noch nicht gefunden
+applied	angewendet
+restored	wiederhergestellt
+%s: %d camera rows (normal camera: %.1f m, FOV %.0f)	%s: %d Kamerazeilen (normale Kamera: %.1f m, FOV %.0f)
+ready	bereit
+not in game	nicht im Spiel
+not available while other players are in your world	nicht verfügbar, solange andere Spieler in deiner Welt sind
+frame timer not found (game updated?)	Bildtimer nicht gefunden (Spiel aktualisiert?)
+paused	pausiert
+waiting	warte
+muted (game in background)	stumm (Spiel im Hintergrund)
+audio devices not available	Audiogeräte nicht verfügbar
+no audio session of the game found yet	noch keine Audiositzung des Spiels gefunden
+playing	läuft
+resumed (loading / another player joined)	fortgesetzt (Ladebildschirm / Spieler beigetreten)
+effect table not found yet	Effekttabelle noch nicht gefunden
+effect list empty	Effektliste leer
+effect list not found	Effektliste nicht gefunden
+learning the effect list layout	lerne den Aufbau der Effektliste
+Effect	Effekt

@@ -1,0 +1,130 @@
+# zzostoom Quality of Life - ko translation. English<TAB>translation, one per line.
+# Keep %d / %s / %.1f in the same order; \n is a line break. Run tools/gen_lang.py after editing.
+Camera	카메라
+Combat HUD	전투 HUD
+Controls	조작
+Performance	성능
+Misc	기타
+Settings	설정
+Reset	초기화
+Status:	상태:
+Status: %s	상태: %s
+Camera adjustments	카메라 조정
+Edits the game's camera table (LockCamParam) in memory. Nothing is saved to regulation.bin, so it works with any regulation mod and with Seamless Co-op.	게임의 카메라 테이블(LockCamParam)을 메모리에서 수정합니다. regulation.bin에는 아무것도 저장하지 않으므로 어떤 regulation 모드나 Seamless Co-op과도 함께 쓸 수 있습니다.
+View	시점
+Distance	거리
+How far behind the character the camera sits (x the game's own distance, which differs per situation: on foot, on Torrent, in some boss arenas...).	캐릭터 뒤 카메라의 거리입니다(게임 기본 거리의 배수. 도보, 영마 토렌트, 일부 보스 구역 등 상황마다 다릅니다).
+Field of view	시야각
+%+.0f deg	%+.0f°
+Added to the game's vertical field of view (48 deg on foot).	게임의 세로 시야각에 더해집니다(도보 시 48°).
+Height	높이
+Raises or lowers the point the camera looks at (1.45 m above the feet on foot).	카메라가 바라보는 지점을 올리거나 내립니다(도보 시 발에서 1.45m 위).
+Lock-on	록온
+Lock-on range	록온 거리
+Distance at which you can lock on (15 m on foot, more for some bosses).	록온할 수 있는 거리(도보 시 15m, 일부 보스는 더 멀리).
+Lock-on camera tilt	록온 시 카메라 기울기
+How much the camera pitches toward a locked target. Lower values keep the camera level against tall bosses or enemies above / below you.	록온한 대상 쪽으로 카메라가 기우는 정도입니다. 낮추면 큰 보스나 위/아래에 있는 적에게도 카메라가 수평을 유지합니다.
+Also in the game's own settings	게임 자체 설정에도
+System > Camera Options has two switches for the camera fighting you:\n  - Camera Auto Wall Recovery: the camera swings away from walls by itself.\n  - Camera Auto Rotation: the camera turns while you walk left / right.\nTurn both Off to keep the camera where you put it.	시스템 > 카메라 옵션에 카메라가 제멋대로 움직이는 것을 막는 항목이 두 개 있습니다:\n  - 벽 근처 카메라 자동 보정: 벽 근처에서 카메라가 저절로 움직입니다.\n  - 카메라 자동 회전: 좌우로 걸으면 카메라가 돌아갑니다.\n둘 다 끄면 카메라가 둔 자리에 그대로 있습니다.
+Stance (poise) bars	체간 게이지
+Enemy bars	적 게이지
+A bar above every enemy you are fighting. It fills up as you break its stance; when it is full the enemy staggers (bosses kneel for a critical hit).	싸우는 적마다 위에 게이지를 표시합니다. 체간을 깎을수록 차오르고, 가득 차면 적이 비틀거립니다(보스는 무릎을 꿇어 치명타가 가능해집니다).
+Focus bar (top of the screen)	주목 게이지(화면 위)
+A large bar for the enemy that was hit most recently: good for bosses.	마지막으로 공격한 적의 큰 게이지입니다. 보스전에 좋습니다.
+My own bar (bottom of the screen)	내 게이지(화면 아래)
+Your poise: when it fills up, you get staggered. Shown only while it is damaged.	내 강인도입니다. 가득 차면 비틀거립니다. 깎인 동안에만 표시됩니다.
+Enemy HP numbers	적 HP 수치
+Buffs	버프
+Buff timers	버프 남은 시간
+Time left on your active buffs (Golden Vow, Flame Grant Me Strength, crystal tears, boluses...).	활성 버프의 남은 시간(기도, 결정 눈물, 환약 등).
+Also buffs without a known name	이름을 모르는 버프도 표시
+ok	정상
+ok (estimating time left)	정상(남은 시간 추정)
+Layout	배치
+HUD size	HUD 크기
+Bar height above enemies	적 위 게이지 높이
+Max. distance	최대 거리
+Preview (example bars on screen)	미리보기(예시 게이지)
+Instant roll	즉시 구르기
+Elden Ring rolls when you RELEASE the dodge button, because holding it means sprint. With this on, the roll starts the moment you press; keep holding to sprint afterwards.	엘든 링은 회피 버튼을 '뗄 때' 구릅니다(누르고 있으면 달리기이기 때문). 켜면 누르는 순간 구르고, 계속 누르면 이어서 달립니다.
+Roll on press	누를 때 구르기
+Dodge button	회피 버튼
+The controller button your game uses for "Backstep, Dodge Roll, Dash" (B / Circle by default).	게임에서 '백스텝, 구르기, 달리기'에 쓰는 패드 버튼(기본값 B / ○).
+Sprint after	달리기 시작까지
+Keep the button held this long after pressing to start sprinting.	누른 뒤 이 시간만큼 계속 누르면 달리기가 시작됩니다.
+Minimum sprint	최소 달리기 시간
+A sprint started by the mod is held at least this long, so that letting go is not read as a second tap (= a second roll) by the game. Raise it if you sometimes get a double roll when releasing a short sprint.	모드가 시작한 달리기는 최소 이 시간 동안 유지됩니다. 버튼을 뗄 때 두 번째 입력(= 두 번째 구르기)으로 인식되지 않게 하기 위해서입니다. 짧은 달리기를 멈출 때 가끔 두 번 구르면 값을 올리세요.
+Not active on Torrent, in this menu or while L3 / R3 is held (cheat sheet shortcuts).	영마 토렌트 탑승 중, 이 메뉴가 열려 있을 때, L3 / R3를 누르고 있는 동안(cheat sheet 단축키)에는 작동하지 않습니다.
+Controller: %s	컨트롤러: %s
+hooked	연결됨
+not available	사용 불가
+Frame rate	프레임 레이트
+Unlock the frame rate	프레임 제한 해제
+Removes the 60 FPS limit. Works in exclusive fullscreen, borderless and windowed mode and with Seamless Co-op.	60FPS 제한을 없앱니다. 전용 전체 화면, 테두리 없음, 창 모드와 Seamless Co-op에서 작동합니다.
+auto (%d FPS)	자동(%d FPS)
+FPS limit	FPS 제한
+0 = your monitor's refresh rate. Changes apply immediately.	0 = 모니터 주사율. 변경 사항은 즉시 적용됩니다.
+auto (%d Hz)	자동(%d Hz)
+Fullscreen refresh rate	전체 화면 주사율
+The refresh rate requested in exclusive fullscreen (the game forces 60 Hz). Applies the next time the game switches to fullscreen (restart, or change the screen mode in the game's settings).	전용 전체 화면에서 요청하는 주사율입니다(게임은 60Hz로 고정). 다음에 전체 화면으로 전환될 때 적용됩니다(재시작하거나 게임 설정에서 화면 모드 변경).
+FPS counter	FPS 표시
+Now: %.0f FPS (%.1f ms)	현재: %.0f FPS(%.1f ms)
+Pause	일시정지
+Pause key	일시정지 키
+Freezes the game (enemies, timers, everything) until you press it again. Only when you are alone in your world: with Seamless Co-op partners it does nothing.	다시 누를 때까지 게임을 멈춥니다(적, 타이머 등 모두). 내 세계에 혼자 있을 때만 작동하며, Seamless Co-op 동료가 있으면 아무 일도 하지 않습니다.
+Keyboard	키보드
+Resume now	지금 재개
+Pause now	지금 일시정지
+Sound	사운드
+Mute when the game is in the background	백그라운드일 때 음소거
+Alt-Tab / another window in front: the game goes silent until you come back.	Alt-Tab / 다른 창이 앞에 있으면 돌아올 때까지 게임 소리가 꺼집니다.
+hold View	View 길게 누르기
+keyboard only	키보드만
+Hold View to open or close the menu; a short tap still opens the map. Start also closes it. LB / RB switch tabs.	View를 길게 누르면 메뉴를 열고 닫습니다. 짧게 누르면 여전히 지도가 열립니다. Start로도 닫힙니다. LB / RB로 탭 전환.
+View + Start together opens it, Start closes it. LB / RB switch tabs.	View + Start를 함께 누르면 열리고 Start로 닫힙니다. LB / RB로 탭 전환.
+Click both sticks (L3 + R3) to open or close it. LB / RB switch tabs.	양쪽 스틱을 누르면(L3 + R3) 열고 닫습니다. LB / RB로 탭 전환.
+No controller shortcut: use the keyboard key.	컨트롤러 단축키 없음: 키보드 키를 사용하세요.
+Hold View	View 길게 누르기
+None	없음
+Language	언어
+Menu language	메뉴 언어
+Menu	메뉴
+Menu key (keyboard)	메뉴 키(키보드)
+Menu shortcut (controller)	메뉴 단축키(컨트롤러)
+Hold time	길게 누르는 시간
+Text size	글자 크기
+Block game keyboard/mouse input while the menu is open	메뉴가 열려 있는 동안 게임 키보드/마우스 입력 차단
+Show a short hint when the game starts	게임 시작 시 짧은 안내 표시
+About	정보
+No Cheat Engine needed; loaded by Mod Engine 3 as a DLL. Game objects are found by their class names (RTTI), not fixed addresses. Changes are made in memory only. UI: Dear ImGui, hooks: MinHook. Log: zzostoom_qol.log next to the DLL.	Cheat Engine이 필요 없으며 Mod Engine 3가 DLL로 불러옵니다. 게임 객체는 고정 주소가 아니라 클래스 이름(RTTI)으로 찾습니다. 변경은 메모리에서만 이뤄집니다. UI: Dear ImGui, 후킹: MinHook. 로그: DLL 옆의 zzostoom_qol.log.
+zzostoom Quality of Life ready  -  menu: %s / %s	zzostoom Quality of Life 준비됨  -  메뉴: %s / %s
+No character loaded: most features start once you are in game.	캐릭터가 로드되지 않음: 대부분의 기능은 게임에 들어가면 작동합니다.
+PAUSED	일시정지됨
+%s or R3 + Start to resume	%s 또는 R3 + Start로 재개
+HP %s     Stance %.0f / %.0f	HP %s     체간 %.0f / %.0f
+HP 3840 / 6000     Stance 34 / 120	HP 3840 / 6000     체간 34 / 120
+UnlockTheFps.dll is loaded and handles the frame rate (remove it from the ME3 profile to use this one)	UnlockTheFps.dll이 로드되어 프레임 레이트를 관리하고 있습니다(이 기능을 쓰려면 ME3 프로필에서 제거하세요)
+frame limiter not found (game updated?)	프레임 제한기를 찾지 못함(게임이 업데이트됨?)
+off (game default 60 FPS)	꺼짐(게임 기본 60FPS)
+limit %d FPS, fullscreen %d Hz	제한 %d FPS, 전체 화면 %d Hz
+waiting for the game	게임 대기 중
+camera table not found yet	카메라 테이블을 아직 찾지 못함
+applied	적용됨
+restored	복원됨
+%s: %d camera rows (normal camera: %.1f m, FOV %.0f)	%s: 카메라 %d행(일반 카메라: %.1f m, FOV %.0f)
+ready	준비됨
+not in game	게임 중이 아님
+not available while other players are in your world	다른 플레이어가 내 세계에 있으면 사용할 수 없음
+frame timer not found (game updated?)	프레임 타이머를 찾지 못함(게임이 업데이트됨?)
+paused	일시정지됨
+waiting	대기 중
+muted (game in background)	음소거됨(백그라운드)
+audio devices not available	오디오 장치를 사용할 수 없음
+no audio session of the game found yet	게임 오디오 세션을 아직 찾지 못함
+playing	재생 중
+resumed (loading / another player joined)	재개됨(로딩 / 다른 플레이어 참가)
+effect table not found yet	효과 테이블을 아직 찾지 못함
+effect list empty	효과 목록이 비어 있음
+effect list not found	효과 목록을 찾지 못함
+learning the effect list layout	효과 목록 구조 분석 중
+Effect	효과

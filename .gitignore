@@ -1,0 +1,13 @@
+build/
+nexus/
+__pycache__/
+*.log
+*.ini
+GELISTIRME.md
+third_party/imgui/docs/
+third_party/imgui/examples/
+third_party/imgui/misc/
+third_party/minhook/build/
+third_party/minhook/cmake/
+third_party/minhook/dll_resources/
+third_party/*/.github/

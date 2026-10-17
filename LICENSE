@@ -1,0 +1,27 @@
+zzostoom Quality of Life - License
+Copyright (c) 2026 zzostoom (https://github.com/EneSuckSoi/zzostoom-quality-of-life)
+
+You may use this mod for free, and you may share, re-upload, modify, fork or build on
+it (including making your own mods based on it), on the following conditions:
+
+1. Credit. Anything you publish that contains, is based on, or is derived from this mod
+   must clearly credit the original author "zzostoom" and link to the original
+   repository: https://github.com/EneSuckSoi/zzostoom-quality-of-life
+   The credit must appear where users can see it (e.g. the mod page, README or
+   description), not only inside files.
+
+2. Keep this notice. Copies and modified versions must include this LICENSE file and
+   THIRD_PARTY_NOTICES.txt.
+
+3. Don't misrepresent. Do not claim the mod, or a modified version of it, as your own
+   original work. Modified versions must say that they were changed.
+
+4. No selling. You may not sell this mod or a modified version of it, or put it behind
+   a paywall.
+
+THE MOD IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. THE AUTHOR IS NOT LIABLE FOR
+ANY DAMAGE, LOST SAVES, BANS OR OTHER PROBLEMS CAUSED BY USING IT. USE IT OFFLINE OR
+WITH SEAMLESS COOP ONLY, AT YOUR OWN RISK.
+
+Third-party components (Dear ImGui, MinHook) are under their own licenses; see
+THIRD_PARTY_NOTICES.txt.
