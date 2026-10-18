@@ -115,7 +115,6 @@ restored	wiederhergestellt
 ready	bereit
 not in game	nicht im Spiel
 not available while other players are in your world	nicht verfügbar, solange andere Spieler in deiner Welt sind
-frame timer not found (game updated?)	Bildtimer nicht gefunden (Spiel aktualisiert?)
 paused	pausiert
 waiting	warte
 muted (game in background)	stumm (Spiel im Hintergrund)
@@ -128,3 +127,17 @@ effect list empty	Effektliste leer
 effect list not found	Effektliste nicht gefunden
 learning the effect list layout	lerne den Aufbau der Effektliste
 Effect	Effekt
+Status build-up bars	Statusaufbau-Balken
+Buff list X	Buff-Liste X
+Position of the buff list, in percent of the screen width. Turn on Preview below to see it.	Position der Buff-Liste in Prozent der Bildschirmbreite. Schalte unten die Vorschau ein, um sie zu sehen.
+Buff list Y	Buff-Liste Y
+Position of the buff list, in percent of the screen height (its top, or its bottom when it grows upwards).	Position der Buff-Liste in Prozent der Bildschirmhöhe (ihr oberer Rand, oder ihr unterer, wenn sie nach oben wächst).
+Grow upwards	Nach oben wachsen
+New buffs are added above the first one instead of below it, so the list can sit at the bottom of the screen.	Neue Buffs kommen über den ersten statt darunter, so kann die Liste am unteren Bildschirmrand sitzen.
+Focus bar X	Fokusbalken X
+Focus bar Y	Fokusbalken Y
+Position of the focus bar's centre, in percent of the screen width. Turn on Preview below to see it.	Position der Mitte des Fokusbalkens in Prozent der Bildschirmbreite. Schalte unten die Vorschau ein, um ihn zu sehen.
+Position of the focus bar, in percent of the screen height.	Position des Fokusbalkens in Prozent der Bildschirmhöhe.
+On the enemy bars and the focus bar:	Auf den Gegnerbalken und dem Fokusbalken:
+An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	Ein Symbol und ein Balken unter den Gegnerbalken, solange sich Blutverlust, Erfrierung, Gift, Scharlachfäule, Schlaf, Wahnsinn oder Todesfäule aufbauen. Nur Zustände, die sich gerade aufbauen, werden gezeigt.
+the game's pause code was not found (game updated?)	Pausecode des Spiels nicht gefunden (Spiel aktualisiert?)

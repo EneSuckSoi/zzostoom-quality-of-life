@@ -275,6 +275,7 @@ bool ReadChr(uintptr_t ins, Chr& out) {
     if (!mem::ReadRaw(modules, mods, sizeof(mods))) return false;
     const uintptr_t data = mods[off::kModData / 8];
     const uintptr_t sa = mods[off::kModSuperArmor / 8];
+    const uintptr_t resist = mods[off::kModResist / 8];
     const uintptr_t phys = mods[off::kModPhysics / 8];
     if (!data || !phys) return false;
     int32_t hp[2];
@@ -287,6 +288,17 @@ bool ReadChr(uintptr_t ins, Chr& out) {
         if (mem::ReadRaw(sa + off::kSuperArmorCurrent, v, sizeof(v))) {
             out.sa = v[0];
             out.sa_max = v[1];
+        }
+    }
+    if (resist) {
+        int32_t v[kStatusCount * 2 + 1];  // gauges at +0x10, resistances at +0x2C
+        if (mem::ReadRaw(resist + off::kResistGauge, v, sizeof(v))) {
+            const int32_t* res = v + (off::kResistResistance - off::kResistGauge) / 4;
+            for (int i = 0; i < kStatusCount; ++i) {
+                if (res[i] <= 0 || res[i] >= 999) continue;  // immune or not a real value
+                out.resistance[i] = res[i];
+                out.buildup[i] = std::clamp(res[i] - v[i], 0, res[i]);
+            }
         }
     }
     return mem::ReadRaw(phys + off::kPhysicsPosition, out.pos, sizeof(out.pos));
@@ -365,22 +377,52 @@ void ForEachChr(const std::function<void(const Chr&)>& fn, const float* center, 
     }
 }
 
+ActiveStatus ReadActiveStatus(uintptr_t ins) {
+    // SpEffectParam.stateInfo of the effect a status puts on its victim, in Status order.
+    static constexpr uint16_t kStateInfo[kStatusCount] = {2, 5, 6, 0x74, 0x104, 0x1B4, 0x1B5};
+    ActiveStatus out;
+    const uintptr_t se = mem::ReadPtr(ins + off::kSpecialEffect);
+    uintptr_t e = se ? mem::ReadPtr(se + off::kEffectHead) : 0;
+    for (int n = 0; e && n < 256; ++n, e = mem::ReadPtr(e + off::kEffectNext)) {
+        const uintptr_t row = mem::ReadPtr(e + off::kEffectParamRow);
+        uint16_t state = 0;
+        float duration = 0;
+        if (!row || !mem::ReadRaw(row + off::kParamStateInfo, &state, sizeof(state)) ||
+            !mem::ReadRaw(row + off::kParamDuration, &duration, sizeof(duration)))
+            continue;
+        // Instant rows with the same stateInfo are cures ("Grace - Remove Poison"...).
+        if (duration == 0.0f) continue;
+        for (int i = 0; i < kStatusCount; ++i) {
+            if (state != kStateInfo[i]) continue;
+            const float left = mem::Read<float>(e + off::kEffectTimeLeft).value_or(0.0f);
+            out.mask |= 1u << i;
+            if (duration > 0 && left > out.left[i]) {
+                out.left[i] = std::min(left, duration);
+                out.total[i] = duration;
+            }
+        }
+    }
+    return out;
+}
+
 bool IsChr(uintptr_t ins) {
     const Kind k = KindOf(ins);
     return k == Kind::kPlayer || k == Kind::kNpc;
 }
 
 int PlayerCount() {
-    // Players are all in the player set (+0x10EE0 in 1.17.1); counting through every set is
-    // simpler than relying on that offset and only runs while paused.
-    // NPC phantoms (invaders, summoned NPCs, mimic-like copies) are PlayerIns too, but they carry
-    // an NpcParam id; real players don't.
+    // Counting through every set is simpler than relying on the player set's offset and only
+    // runs when pausing. Many PlayerIns are not players: bloodstain / message / grace ghosts
+    // (replays of other players) and NPC phantoms (summons, invaders), which carry an NpcParam.
     const uintptr_t local = PlayerIns();
     int n = local ? 1 : 0;
     ForEachChr([&](const Chr& c) {
         if (!c.player || c.hp <= 0 || c.ins == local) return;
-        const int npc = mem::Read<int32_t>(c.ins + off::kNpcId).value_or(0);
-        if (npc > 0) return;
+        const int npc_param = mem::Read<int32_t>(c.ins + off::kNpcParamId).value_or(0);
+        const int type = mem::Read<int32_t>(c.ins + off::kChrType).value_or(-1);
+        const bool ghost_or_npc = type == 3 || type == 4 || type == 5 || type == 10 || type == 11 ||
+                                  type == 14 || (type >= 19 && type <= 21);
+        if (npc_param > 0 || ghost_or_npc || type < 0) return;
         ++n;
     });
     return n;

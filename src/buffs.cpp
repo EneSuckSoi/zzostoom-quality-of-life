@@ -220,8 +220,10 @@ void Update(bool show_unnamed) {
         mem::ReadRaw(row, &icon, sizeof(icon));
         mem::ReadRaw(row + 8, &duration, sizeof(duration));
         // Sub-second effects with an icon are internal helpers (Golden Vow has a 0.1 s one).
-        if (icon <= 0 || duration < 1.0f) continue;
+        // Some weapon skill buffs have no icon in the game (Seppuku): known names are kept.
+        if (duration < 1.0f) continue;
         const int name_index = NameIndex(id);
+        if (icon <= 0 && name_index < 0) continue;
         if (name_index < 0 && !show_unnamed) continue;
 
         auto old = g_seen.find(e);

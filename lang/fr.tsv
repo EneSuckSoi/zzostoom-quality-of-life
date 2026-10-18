@@ -115,7 +115,6 @@ restored	restauré
 ready	prêt
 not in game	pas en jeu
 not available while other players are in your world	indisponible quand d'autres joueurs sont dans votre monde
-frame timer not found (game updated?)	minuteur d'image introuvable (jeu mis à jour ?)
 paused	en pause
 waiting	en attente
 muted (game in background)	muet (jeu en arrière-plan)
@@ -128,3 +127,17 @@ effect list empty	liste des effets vide
 effect list not found	liste des effets introuvable
 learning the effect list layout	analyse de la liste des effets
 Effect	Effet
+Status build-up bars	Barres d'accumulation d'altérations
+Buff list X	Liste des bonus X
+Position of the buff list, in percent of the screen width. Turn on Preview below to see it.	Position de la liste des bonus, en pourcentage de la largeur de l'écran. Activez l'aperçu plus bas pour la voir.
+Buff list Y	Liste des bonus Y
+Position of the buff list, in percent of the screen height (its top, or its bottom when it grows upwards).	Position de la liste des bonus, en pourcentage de la hauteur de l'écran (son haut, ou son bas quand elle s'agrandit vers le haut).
+Grow upwards	S'agrandir vers le haut
+New buffs are added above the first one instead of below it, so the list can sit at the bottom of the screen.	Les nouveaux bonus s'ajoutent au-dessus du premier au lieu d'en dessous : la liste peut ainsi se placer en bas de l'écran.
+Focus bar X	Barre de cible X
+Focus bar Y	Barre de cible Y
+Position of the focus bar's centre, in percent of the screen width. Turn on Preview below to see it.	Position du centre de la barre de cible, en pourcentage de la largeur de l'écran. Activez l'aperçu plus bas pour la voir.
+Position of the focus bar, in percent of the screen height.	Position de la barre de cible, en pourcentage de la hauteur de l'écran.
+On the enemy bars and the focus bar:	Sur les barres des ennemis et la barre de cible :
+An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	Une icône et une barre sous les barres des ennemis pendant que l'hémorragie, la gelure, le poison, la putréfaction écarlate, le sommeil, la folie ou le fléau mortel s'accumulent. Seules les altérations en cours d'accumulation sont affichées.
+the game's pause code was not found (game updated?)	code de pause du jeu introuvable (jeu mis à jour ?)

@@ -11,3 +11,4 @@ third_party/minhook/build/
 third_party/minhook/cmake/
 third_party/minhook/dll_resources/
 third_party/*/.github/
+tools/.cache/

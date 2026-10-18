@@ -28,7 +28,7 @@ namespace {
 
 using i18n::T;
 
-constexpr const char* kModVersion = "1.0.0";
+constexpr const char* kModVersion = "1.1.0";
 
 const char* const kTabs[] = {"Camera", "Combat HUD", "Controls", "Performance", "Misc", "Settings"};
 constexpr int kTabCount = 6;
@@ -233,15 +233,38 @@ void DrawHudTab() {
           "it is full the enemy staggers (bosses kneel for a critical hit).");
     Check("Focus bar (top of the screen)", &c.hud_focus_bar,
           "A large bar for the enemy that was hit most recently: good for bosses.");
+    ImGui::BeginDisabled(!c.hud_focus_bar);
+    SliderF("Focus bar X", &c.hud_focus_x, 0.0f, 100.0f, "%.1f %%", 50.0f,
+            "Position of the focus bar's centre, in percent of the screen width. Turn on Preview "
+            "below to see it.");
+    SliderF("Focus bar Y", &c.hud_focus_y, 0.0f, 100.0f, "%.1f %%", 11.5f,
+            "Position of the focus bar, in percent of the screen height.");
+    ImGui::EndDisabled();
     Check("My own bar (bottom of the screen)", &c.hud_player_stagger,
           "Your poise: when it fills up, you get staggered. Shown only while it is damaged.");
+    Dim("On the enemy bars and the focus bar:");
+    ImGui::BeginDisabled(!c.hud_enemy_stagger && !c.hud_focus_bar);
     Check("Enemy HP numbers", &c.hud_enemy_hp);
+    Check("Status build-up bars", &c.hud_status,
+          "An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet "
+          "rot, sleep, madness or death blight builds up. Only statuses that are building up are "
+          "shown.");
+    ImGui::EndDisabled();
     Separator("Buffs");
     Check("Buff timers", &c.hud_buffs,
           "Time left on your active buffs (Golden Vow, Flame Grant Me Strength, crystal tears, "
           "boluses...).");
     ImGui::BeginDisabled(!c.hud_buffs);
     Check("Also buffs without a known name", &c.hud_buffs_unnamed);
+    SliderF("Buff list X", &c.hud_buffs_x, 0.0f, 95.0f, "%.1f %%", 2.2f,
+            "Position of the buff list, in percent of the screen width. Turn on Preview below to "
+            "see it.");
+    SliderF("Buff list Y", &c.hud_buffs_y, 0.0f, 100.0f, "%.1f %%", 21.5f,
+            "Position of the buff list, in percent of the screen height (its top, or its bottom when it "
+            "grows upwards).");
+    Check("Grow upwards", &c.hud_buffs_grow_up,
+          "New buffs are added above the first one instead of below it, so the list can sit at "
+          "the bottom of the screen.");
     ImGui::EndDisabled();
     if (c.hud_buffs) {
         const std::string status = buffs::Status();

@@ -4,6 +4,68 @@
 namespace zz::i18n {
 
 const char* const kBuffText[][kLangCount] = {
+    {nullptr, "Barrikadenschild", "Rempart inébranlable", "Escudo barricada", "Escudo-Barricada", "Заслон", "鉄壁の盾", "철벽의 방패", "铁壁盾防", nullptr},  // Barricade Shield
+    {nullptr, "Barrikadenschild", "Rempart inébranlable", "Escudo barricada", "Escudo-Barricada", "Заслон", "鉄壁の盾", "철벽의 방패", "铁壁盾防", nullptr},  // Barricade Shield
+    {nullptr, "Barrikadenschild", "Rempart inébranlable", "Escudo barricada", "Escudo-Barricada", "Заслон", "鉄壁の盾", "철벽의 방패", "铁壁盾防", nullptr},  // Barricade Shield
+    {nullptr, "Barrikadenschild", "Rempart inébranlable", "Escudo barricada", "Escudo-Barricada", "Заслон", "鉄壁の盾", "철벽의 방패", "铁壁盾防", nullptr},  // Barricade Shield
+    {nullptr, "Barrikadenschild", "Rempart inébranlable", "Escudo barricada", "Escudo-Barricada", "Заслон", "鉄壁の盾", "철벽의 방패", "铁壁盾防", nullptr},  // Barricade Shield
+    {nullptr, "Barrikadenschild", "Rempart inébranlable", "Escudo barricada", "Escudo-Barricada", "Заслон", "鉄壁の盾", "철벽의 방패", "铁壁盾防", nullptr},  // Barricade Shield
+    {nullptr, "Heilige Klinge", nullptr, "Hoja sagrada", "Lâmina Sagrada", "Священный клинок", "聖なる刃", "신성한 칼날", "神圣刀刃", nullptr},  // Sacred Blade
+    {nullptr, "Heilige Klinge", nullptr, "Hoja sagrada", "Lâmina Sagrada", "Священный клинок", "聖なる刃", "신성한 칼날", "神圣刀刃", nullptr},  // Sacred Blade
+    {nullptr, "Frostnebel", nullptr, "Niebla escalofriante", "Névoa Refrigeradora", "Льдистый туман", "冷気の霧", "냉기 안개", "寒气冻雾", nullptr},  // Chilling Mist
+    {nullptr, "Frostnebel", nullptr, "Niebla escalofriante", "Névoa Refrigeradora", "Льдистый туман", "冷気の霧", "냉기 안개", "寒气冻雾", nullptr},  // Chilling Mist
+    {nullptr, "Giftiger Nebel", nullptr, "Niebla venenosa", "Névoa Venenosa", "Отравляющий туман", "毒の霧", "독 안개", "毒雾", nullptr},  // Poisonous Mist
+    {nullptr, "Giftiger Nebel", nullptr, "Niebla venenosa", "Névoa Venenosa", "Отравляющий туман", "毒の霧", "독 안개", "毒雾", nullptr},  // Poisonous Mist
+    {nullptr, "Heiliger Boden", "Terre sacrée", "Suelo sagrado", "Solo Sagrado", "Святая земля", "聖域", "성역", "圣域", nullptr},  // Holy Ground
+    {nullptr, "Heiliger Boden", "Terre sacrée", "Suelo sagrado", "Solo Sagrado", "Святая земля", "聖域", "성역", "圣域", nullptr},  // Holy Ground
+    {nullptr, "Beharren", nullptr, "Indómito", "Resistência", "Выдержка", "我慢", "참기", "忍耐", nullptr},  // Endure
+    {nullptr, "Beharren", nullptr, "Indómito", "Resistência", "Выдержка", "我慢", "참기", "忍耐", nullptr},  // Endure
+    {nullptr, "Beharren", nullptr, "Indómito", "Resistência", "Выдержка", "我慢", "참기", "忍耐", nullptr},  // Endure
+    {nullptr, "Beharren", nullptr, "Indómito", "Resistência", "Выдержка", "我慢", "참기", "忍耐", nullptr},  // Endure
+    {nullptr, "Blitzschnitt", "Entaille foudroyante", "Tajo fulgurante", "Corte de Relâmpago", "Удар молнии", "雷撃斬", "뇌격참", "雷击斩", nullptr},  // Lightning Slash
+    {nullptr, "Blitzschnitt", "Entaille foudroyante", "Tajo fulgurante", "Corte de Relâmpago", "Удар молнии", "雷撃斬", "뇌격참", "雷击斩", nullptr},  // Lightning Slash
+    {nullptr, "Eiserner Wille", "Détermination", "Determinación", "Determinação", "Твёрдость духа", "デターミネーション", "디터미네이션", "决心", nullptr},  // Determination
+    {nullptr, "Eiserner Wille", "Détermination", "Determinación", "Determinação", "Твёрдость духа", "デターミネーション", "디터미네이션", "决心", nullptr},  // Determination
+    {nullptr, "Eiserner Wille", "Détermination", "Determinación", "Determinação", "Твёрдость духа", "デターミネーション", "디터미네이션", "决心", nullptr},  // Determination
+    {nullptr, "Eiserner Wille", "Détermination", "Determinación", "Determinação", "Твёрдость духа", "デターミネーション", "디터미네이션", "决心", nullptr},  // Determination
+    {nullptr, "Mut der Königsritter", "Résolut. de chevalier royal", "Resolución de caballero real", "Determinação do Cavaleiro Real", "Решимость рыцаря", "王騎士の決意", "도읍 기사의 결의", "侍王骑士的决心", nullptr},  // Royal Knight's Resolve
+    {nullptr, "Mut der Königsritter", "Résolut. de chevalier royal", "Resolución de caballero real", "Determinação do Cavaleiro Real", "Решимость рыцаря", "王騎士の決意", "도읍 기사의 결의", "侍王骑士的决心", nullptr},  // Royal Knight's Resolve
+    {nullptr, "Mut der Königsritter", "Résolut. de chevalier royal", "Resolución de caballero real", "Determinação do Cavaleiro Real", "Решимость рыцаря", "王騎士の決意", "도읍 기사의 결의", "侍王骑士的决心", nullptr},  // Royal Knight's Resolve
+    {nullptr, "Mut der Königsritter", "Résolut. de chevalier royal", "Resolución de caballero real", "Determinação do Cavaleiro Real", "Решимость рыцаря", "王騎士の決意", "도읍 기사의 결의", "侍王骑士的决心", nullptr},  // Royal Knight's Resolve
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},  // Golden Tempering
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},  // Golden Tempering
+    {nullptr, "Goldener Schwur", "Vœu doré", "Juramento dorado", "Voto Dourado", "Золотой обет", "黄金樹に誓って", "황금 나무에 맹세코", "黄金树立誓", nullptr},  // Golden Vow
+    {nullptr, "Seppuku", "Seppuku", "Seppuku", "Seppuku", "Сэппуку", "切腹", "할복", "切腹", nullptr},  // Seppuku
+    {nullptr, "Seppuku", "Seppuku", "Seppuku", "Seppuku", "Сэппуку", "切腹", "할복", "切腹", nullptr},  // Seppuku
+    {nullptr, "Schachzug des Assassinen", "Manœuvre d'assassin", "Técnica de asesino", "Gambito do Assassino", "Трюк убийцы", "暗殺の作法", "암살의 작법", "暗杀办法", nullptr},  // Assassin's Gambit
+    {nullptr, "Schachzug des Assassinen", "Manœuvre d'assassin", "Técnica de asesino", "Gambito do Assassino", "Трюк убийцы", "暗殺の作法", "암살의 작법", "暗杀办法", nullptr},  // Assassin's Gambit
+    {nullptr, "Flammender Schlag", "Frappe ardente", "Golpe llameante", "Golpe Flamejante", "Пламенный удар", "炎撃", "염격", "炎击", nullptr},  // Flaming Strike
+    {nullptr, "Flammender Schlag", "Frappe ardente", "Golpe llameante", "Golpe Flamejante", "Пламенный удар", "炎撃", "염격", "炎击", nullptr},  // Flaming Strike
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},  // Ruinous Ghostflame
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},  // Ruinous Ghostflame
+    {nullptr, "Kriegsgebrüll", nullptr, "Grito de guerra", "Grito de Guerra", "Боевой клич", "ウォークライ", "워 크라이", "战吼", nullptr},  // War Cry
+    {nullptr, "Kriegsgebrüll", nullptr, "Grito de guerra", "Grito de Guerra", "Боевой клич", "ウォークライ", "워 크라이", "战吼", nullptr},  // War Cry
+    {nullptr, "Kriegsgebrüll", nullptr, "Grito de guerra", "Grito de Guerra", "Боевой клич", "ウォークライ", "워 크라이", "战吼", nullptr},  // War Cry
+    {nullptr, "Kriegsgebrüll", nullptr, "Grito de guerra", "Grito de Guerra", "Боевой клич", "ウォークライ", "워 크라이", "战吼", nullptr},  // War Cry
+    {nullptr, "Felsklinge", "Lame rocheuse", "Hoja rocosa", "Lâmina de Pedra", "Каменный меч", "岩石剣", "암석검", "岩石剑", nullptr},  // Cragblade
+    {nullptr, "Felsklinge", "Lame rocheuse", "Hoja rocosa", "Lâmina de Pedra", "Каменный меч", "岩石剣", "암석검", "岩石剑", nullptr},  // Cragblade
+    {nullptr, "Felsklinge", "Lame rocheuse", "Hoja rocosa", "Lâmina de Pedra", "Каменный меч", "岩石剣", "암석검", "岩石剑", nullptr},  // Cragblade
+    {nullptr, "Felsklinge", "Lame rocheuse", "Hoja rocosa", "Lâmina de Pedra", "Каменный меч", "岩石剣", "암석검", "岩石剑", nullptr},  // Cragblade
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},  // Last Rites
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},  // Last Rites
+    {nullptr, "Heilige Ordnung", nullptr, "Orden sagrada", "Ordem Sagrada", "Священный порядок", "聖律", "성률", "圣律", nullptr},  // Sacred Order
+    {nullptr, "Heilige Ordnung", nullptr, "Orden sagrada", "Ordem Sagrada", "Священный порядок", "聖律", "성률", "圣律", nullptr},  // Sacred Order
+    {nullptr, "Heilige Ordnung", nullptr, "Orden sagrada", "Ordem Sagrada", "Священный порядок", "聖律", "성률", "圣律", nullptr},  // Sacred Order
+    {nullptr, "Heilige Ordnung", nullptr, "Orden sagrada", "Ordem Sagrada", "Священный порядок", "聖律", "성률", "圣律", nullptr},  // Sacred Order
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},  // Oath of Vengeance
+    {nullptr, "Prahlendes Brüllen", "Cri du hâbleur", "Rugido jactancioso", "Grito do Exibido", "Рёв хвастуна", "誇示する咆哮", "과시하는 포효", "夸耀咆哮", nullptr},  // Braggart's Roar
+    {nullptr, "Prahlendes Brüllen", "Cri du hâbleur", "Rugido jactancioso", "Grito do Exibido", "Рёв хвастуна", "誇示する咆哮", "과시하는 포효", "夸耀咆哮", nullptr},  // Braggart's Roar
+    {nullptr, "Prahlendes Brüllen", "Cri du hâbleur", "Rugido jactancioso", "Grito do Exibido", "Рёв хвастуна", "誇示する咆哮", "과시하는 포효", "夸耀咆哮", nullptr},  // Braggart's Roar
+    {nullptr, "Prahlendes Brüllen", "Cri du hâbleur", "Rugido jactancioso", "Grito do Exibido", "Рёв хвастуна", "誇示する咆哮", "과시하는 포효", "夸耀咆哮", nullptr},  // Braggart's Roar
+    {nullptr, "Geteilte Ordnung", nullptr, "Orden común", "Ordem Compartilhada", "Общее дело", "聖律共有", "성률 공유", "共享圣律", nullptr},  // Shared Order
+    {nullptr, "Geteilte Ordnung", nullptr, "Orden común", "Ordem Compartilhada", "Общее дело", "聖律共有", "성률 공유", "共享圣律", nullptr},  // Shared Order
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},  // Ice Lightning Sword
+    {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},  // Ice Lightning Sword
     {nullptr, "Purpurne Kristallträne", "Larme de cristal pourpre fendue", "Lágrima de cristal carmesí derramada", "Lágrima de Cristal Transbordando Carmesim", "Пролитая багровая слеза", "緋溢れの結晶雫", "넘친 붉은 결정 물방울", "漫红结晶露滴", nullptr},  // Crimsonspill Crystal Tear
     {nullptr, "Grüne Kristallträne", "Larme de cristal verte fendue", "Lágrima de cristal verde derramada", "Lágrima de Cristal Transbordando Verde", "Пролитая зелёная слеза", "緑溢れの結晶雫", "넘친 초록 결정 물방울", "漫绿结晶露滴", nullptr},  // Greenspill Crystal Tear
     {nullptr, "Opalene Blasenträne", "Perle de cristal opaline", "Lágrima de burbuja iridiscente", "Bolha de Lágrima Opala", "Опаловая слеза в пузыре", "真珠色の泡雫", "진주색 거품 물방울", "珍珠泡状露滴", nullptr},  // Opaline Bubbletear
@@ -112,6 +174,6 @@ const char* const kBuffText[][kLangCount] = {
     {nullptr, "Dornenmantel", "Rempart d'épines", "Manto de espinas", "Manto de Espinhos", "Шипованная мантия", "刺纏い", "가시 두르기", "棘刺上身", nullptr},  // Mantle of Thorns
     {nullptr, "Drachenblitz von Florissax", "Éclair draconique de Florissax", "Dracorrayo de Florissax", "Raio de Dragão de Florissax", "Драконья молния Флориссакс", "フローサクスの竜雷", "플로삭스의 용뢰", "芙柔桑克斯的龙雷", nullptr},  // Dragonbolt of Florissax
 };
-const int kBuffTextCount = 107;
+const int kBuffTextCount = 169;
 
 }  // namespace zz::i18n

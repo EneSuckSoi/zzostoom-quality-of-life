@@ -396,7 +396,6 @@ void RenderFrame(IDXGISwapChain3* sc) {
 void OnPresent(IDXGISwapChain3* sc) {
     fps::OnPresent();
     RenderFrame(sc);
-    features::AfterFrame();  // pause frame cap
 }
 
 HRESULT STDMETHODCALLTYPE HookedPresent(IDXGISwapChain3* sc, UINT sync, UINT flags) {

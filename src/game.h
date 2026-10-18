@@ -22,16 +22,31 @@ constexpr ptrdiff_t kChrSetCapacity = 0x10;  // u32
 constexpr ptrdiff_t kChrSetEntries = 0x18;   // {ChrIns*, ...}[capacity], 0x10 bytes each
 // ChrIns
 constexpr ptrdiff_t kCharacterId = 0x188;
-constexpr ptrdiff_t kNpcId = 0x64;
+constexpr ptrdiff_t kNpcParamId = 0x60;  // NpcParam row, 0 / -1 for real players
+constexpr ptrdiff_t kNpcId = 0x64;       // 4-digit character id (8000 = Torrent)
+constexpr ptrdiff_t kChrType = 0x68;     // i32: 0 local, 1 white phantom, 10 bloodstain ghost...
 constexpr ptrdiff_t kModules = 0x190;
 constexpr ptrdiff_t kSpecialEffect = 0x178;  // CSSpecialEffect*
+// CSSpecialEffect: list of active SpEffects (checked in 1.17.1, see buffs.cpp)
+constexpr ptrdiff_t kEffectHead = 0x8;
+constexpr ptrdiff_t kEffectNext = 0x30;
+constexpr ptrdiff_t kEffectTimeLeft = 0x44;   // float seconds
+constexpr ptrdiff_t kEffectParamRow = 0x0;    // -> SpEffectParam row
+// SpEffectParam row
+constexpr ptrdiff_t kParamDuration = 0x8;     // float seconds, -1 = permanent
+constexpr ptrdiff_t kParamStateInfo = 0x156;  // u16: which status the effect is
 // Module container
 constexpr ptrdiff_t kModData = 0x00;
+constexpr ptrdiff_t kModResist = 0x20;
 constexpr ptrdiff_t kModSuperArmor = 0x40;
 constexpr ptrdiff_t kModPhysics = 0x68;
 // CSChrDataModule
 constexpr ptrdiff_t kDataHp = 0x138;
 constexpr ptrdiff_t kDataMaxHp = 0x13C;
+// CSChrResistModule: per status a gauge that starts at the resistance and falls with every hit
+// (build-up = resistance - gauge); it procs below 1 and refills to the resistance.
+constexpr ptrdiff_t kResistGauge = 0x10;       // i32[7]
+constexpr ptrdiff_t kResistResistance = 0x2C;  // i32[7], 999 = immune
 // CSChrSuperArmorModule (poise / stance)
 constexpr ptrdiff_t kSuperArmorCurrent = 0x10;
 constexpr ptrdiff_t kSuperArmorMax = 0x14;
@@ -57,6 +72,9 @@ bool Riding();  // on Torrent
 // Number of players in the world (you included); > 1 in co-op / invasions.
 int PlayerCount();
 
+// Status ailments in CSChrResistModule order.
+enum Status { kPoison, kScarletRot, kBloodLoss, kDeathBlight, kFrostbite, kSleep, kMadness, kStatusCount };
+
 struct Chr {
     uintptr_t ins = 0;
     int hp = 0, max_hp = 0;
@@ -64,8 +82,20 @@ struct Chr {
     float pos[3] = {};         // physics position (map-local)
     bool player = false;       // a player (you or another one)
     bool buddy = false;        // spirit ash / Torrent
+    // Status build-up so far and the amount that procs it; resistance 0 = unknown / immune.
+    int buildup[kStatusCount] = {};
+    int resistance[kStatusCount] = {};
 };
 bool ReadChr(uintptr_t ins, Chr& out);
+
+// Statuses that are in effect on a character (poisoned, rotting, frostbitten, asleep...): bit i =
+// Status i, with the seconds left / total of each (0 when the effect has no timer).
+struct ActiveStatus {
+    uint32_t mask = 0;
+    float left[kStatusCount] = {};
+    float total[kStatusCount] = {};
+};
+ActiveStatus ReadActiveStatus(uintptr_t ins);
 // Still a live character (its vtable is a known ChrIns class)?
 bool IsChr(uintptr_t ins);
 // Every loaded character (players included); with `center`, only those within `radius` metres.

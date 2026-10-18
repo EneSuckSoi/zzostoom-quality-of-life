@@ -7,7 +7,6 @@
 #include <atomic>
 #include <chrono>
 #include <cmath>
-#include <cstring>
 #include <mutex>
 
 #include "config.h"
@@ -29,32 +28,39 @@ double Now() {
 }
 
 // ---- Pause ---------------------------------------------------------------------------------
-// CSFlipperImp has a debug "fixed time step" mode: with +0x2C9 = 0 and +0x2C8 = 1 every frame
-// advances the game by 1 / [+0x2C4] seconds instead of the real frame time (see the end of the
-// flipper update, RVA 0xe850fc in 2.7.1.0). A huge step rate freezes the world while the game
-// keeps rendering; restoring the three fields resumes it.
-namespace off_flipper {
-constexpr ptrdiff_t kTargetFrameTime = 0x1C;  // float, = 1 / frame limit
-constexpr ptrdiff_t kFixedRate = 0x2C4;       // float
-constexpr ptrdiff_t kFixedEnable = 0x2C8;     // u8
-constexpr ptrdiff_t kVariableStep = 0x2C9;    // u8, 1 in normal play
-}  // namespace off_flipper
-
-constexpr float kPausedRate = 100000.0f;
-
+// The game has its own pause, used while a tutorial message is on screen. One conditional jump
+// decides whether it is in effect ("cmp byte [rbx+128h], 0; je ..."); turning the je into jne
+// pauses the world (enemies, timers, everything) while the game keeps rendering and the camera
+// still moves. Same method as techiew's PauseTheGame (MIT, github.com/techiew/EldenRingMods).
 struct PauseState {
     bool paused = false;
-    uintptr_t flipper = 0;
-    float saved_rate = 0;
-    uint8_t saved_enable = 0, saved_variable = 0;
+    bool searched = false;
+    uintptr_t branch = 0;  // the 0F 84 (je) instruction
     std::string status = "ready";
-    double last_frame = 0;
 } g_pause;
 
-bool FlipperLooksRight(uintptr_t f) {
-    const float frame_time = mem::Read<float>(f + off_flipper::kTargetFrameTime).value_or(0);
-    const uint8_t variable = mem::Read<uint8_t>(f + off_flipper::kVariableStep).value_or(0xFF);
-    return frame_time > 0.0004f && frame_time < 0.1f && variable == 1;
+uintptr_t PauseBranch() {
+    if (!g_pause.searched) {
+        g_pause.searched = true;
+        g_pause.branch = mem::FindPattern(
+            mem::MainModule(),
+            "0F 84 ?? ?? ?? ?? C6 ?? ?? ?? ?? ?? 00 ?? 8D ?? ?? ?? ?? ?? ?? 89 ?? ?? 89 ?? ?? ?? 8B "
+            "?? ?? ?? ?? ?? ?? 85 ?? 75");
+        ZZ_LOG("Pause: game pause branch %s", g_pause.branch ? "found" : "NOT FOUND");
+    }
+    return g_pause.branch;
+}
+
+// Flips the jump's second byte between 84 (je, normal play) and 85 (jne, paused).
+bool SetBranch(bool paused) {
+    const uintptr_t at = PauseBranch();
+    if (!at) return false;
+    const uint8_t expected = paused ? 0x84 : 0x85;
+    const uint8_t want = paused ? 0x85 : 0x84;
+    const uint8_t now = mem::Read<uint8_t>(at + 1).value_or(0);
+    if (now == want) return true;
+    if (now != expected) return false;  // not the code we know: leave it alone
+    return mem::PatchCode(at + 1, &want, 1);
 }
 
 void SetPaused(bool on) {
@@ -70,28 +76,15 @@ void SetPaused(bool on) {
             ZZ_LOG("Pause refused: %d players in the world", players);
             return;
         }
-        const uintptr_t f = game::Singleton("CSFlipperImp");
-        if (!f || !FlipperLooksRight(f)) {
-            g_pause.status = "frame timer not found (game updated?)";
-            ZZ_LOG("Pause: CSFlipperImp %p not usable", reinterpret_cast<void*>(f));
+        if (!SetBranch(true)) {
+            g_pause.status = "the game's pause code was not found (game updated?)";
             return;
         }
-        g_pause.flipper = f;
-        g_pause.saved_rate = mem::Read<float>(f + off_flipper::kFixedRate).value_or(30.0f);
-        g_pause.saved_enable = mem::Read<uint8_t>(f + off_flipper::kFixedEnable).value_or(0);
-        g_pause.saved_variable = mem::Read<uint8_t>(f + off_flipper::kVariableStep).value_or(1);
-        mem::Write<float>(f + off_flipper::kFixedRate, kPausedRate);
-        mem::Write<uint8_t>(f + off_flipper::kFixedEnable, 1);
-        mem::Write<uint8_t>(f + off_flipper::kVariableStep, 0);
         g_pause.paused = true;
         g_pause.status = "paused";
-        ZZ_LOG("Pause on (saved rate %.1f, enable %u, variable %u)", g_pause.saved_rate,
-               g_pause.saved_enable, g_pause.saved_variable);
+        ZZ_LOG("Pause on");
     } else {
-        const uintptr_t f = g_pause.flipper;
-        mem::Write<float>(f + off_flipper::kFixedRate, g_pause.saved_rate);
-        mem::Write<uint8_t>(f + off_flipper::kFixedEnable, g_pause.saved_enable);
-        mem::Write<uint8_t>(f + off_flipper::kVariableStep, g_pause.saved_variable);
+        SetBranch(false);
         g_pause.paused = false;
         g_pause.status = "ready";
         ZZ_LOG("Pause off");
@@ -233,15 +226,6 @@ void Tick(float, bool) {
         g_frame.last_unlock = cfg.fps_unlock;
         fps::Apply();
     }
-}
-
-void AfterFrame() {
-    if (!g_pause.paused) return;
-    // The paused flipper doesn't limit the frame rate any more: hold it near 60 FPS.
-    const double now = Now();
-    const double wait = (1.0 / 60.0) - (now - g_pause.last_frame);
-    if (wait > 0 && wait < 0.05) Sleep(static_cast<DWORD>(wait * 1000.0));
-    g_pause.last_frame = Now();
 }
 
 void StartBackground() {

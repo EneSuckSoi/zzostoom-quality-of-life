@@ -7,8 +7,6 @@ namespace zz::features {
 
 // Render thread, every frame before drawing.
 void Tick(float dt, bool menu_open);
-// Render thread, after the frame was submitted (frame cap while paused).
-void AfterFrame();
 // Starts the background thread (audio session watcher).
 void StartBackground();
 

@@ -115,7 +115,6 @@ restored	복원됨
 ready	준비됨
 not in game	게임 중이 아님
 not available while other players are in your world	다른 플레이어가 내 세계에 있으면 사용할 수 없음
-frame timer not found (game updated?)	프레임 타이머를 찾지 못함(게임이 업데이트됨?)
 paused	일시정지됨
 waiting	대기 중
 muted (game in background)	음소거됨(백그라운드)
@@ -128,3 +127,17 @@ effect list empty	효과 목록이 비어 있음
 effect list not found	효과 목록을 찾지 못함
 learning the effect list layout	효과 목록 구조 분석 중
 Effect	효과
+Status build-up bars	상태 이상 축적 게이지
+Buff list X	버프 목록 X
+Position of the buff list, in percent of the screen width. Turn on Preview below to see it.	버프 목록의 위치(화면 너비 기준 퍼센트)입니다. 아래 미리보기를 켜면 확인할 수 있습니다.
+Buff list Y	버프 목록 Y
+Position of the buff list, in percent of the screen height (its top, or its bottom when it grows upwards).	버프 목록의 위치(화면 높이 기준 퍼센트)입니다. 위로 늘어나게 하면 목록의 아래쪽 기준입니다.
+Grow upwards	위로 늘어나기
+New buffs are added above the first one instead of below it, so the list can sit at the bottom of the screen.	새 버프가 아래가 아니라 첫 번째 버프 위에 추가되어, 목록을 화면 아래쪽에 둘 수 있습니다.
+Focus bar X	주목 게이지 X
+Focus bar Y	주목 게이지 Y
+Position of the focus bar's centre, in percent of the screen width. Turn on Preview below to see it.	주목 게이지 중심의 위치(화면 너비 기준 퍼센트)입니다. 아래 미리보기를 켜면 확인할 수 있습니다.
+Position of the focus bar, in percent of the screen height.	주목 게이지의 위치(화면 높이 기준 퍼센트)입니다.
+On the enemy bars and the focus bar:	적 게이지와 주목 게이지에 표시:
+An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	출혈, 냉기, 독, 부패, 수면, 발광, 즉사가 축적되는 동안 적 게이지 아래에 아이콘과 게이지를 표시합니다. 축적 중인 상태만 표시됩니다.
+the game's pause code was not found (game updated?)	게임의 일시정지 코드를 찾지 못함(게임이 업데이트됨?)

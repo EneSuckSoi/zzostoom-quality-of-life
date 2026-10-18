@@ -35,6 +35,9 @@ struct Track {
     double last_seen = 0;
     double broken_until = 0;
     float shown = 0;  // smoothed damage ratio for the bar
+    int last_buildup = 0;  // sum of all status build-ups
+    game::ActiveStatus active;  // statuses in effect, re-read a few times per second
+    double active_read = -1;
     game::Chr chr;
 };
 std::unordered_map<uintptr_t, Track> g_tracks;
@@ -129,7 +132,11 @@ void UpdateTrack(Track& t, const game::Chr& c, double now, bool seen = true) {
         const bool has_poise = c.sa_max > 1.0f && t.last_sa >= 0.0f && c.sa >= 0.0f;
         const bool sa_down = has_poise && c.sa < t.last_sa - 0.01f;
         const bool hp_down = c.hp > 0 && c.hp < t.last_hp && t.last_hp <= c.max_hp;
-        if (sa_down || hp_down) t.last_change = now;
+        int buildup = 0;
+        for (int b : c.buildup) buildup += b;
+        const bool status_up = buildup > t.last_buildup;
+        t.last_buildup = buildup;
+        if (sa_down || hp_down || status_up) t.last_change = now;
         const bool hit_zero = has_poise && t.last_sa > 0.01f && c.sa <= 0.01f;
         const bool reset_after_low = has_poise && t.last_sa < 0.25f * c.sa_max &&
                                      c.sa >= c.sa_max - 0.01f && hp_down;
@@ -149,10 +156,164 @@ float Distance(const float a[3], const float b[3]) {
     return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
 
-void DrawBuffs(ImDrawList* dl, const std::vector<buffs::Active>& list, float s, ImVec2 origin) {
+// Status colours, muted to sit with the game's own HUD (dark frames, worn gold, desaturated hues).
+const ImU32 kStatusColor[game::kStatusCount] = {
+    IM_COL32(124, 146, 78, 255),   // poison: moss green
+    IM_COL32(176, 92, 62, 255),    // scarlet rot: rust
+    IM_COL32(158, 40, 44, 255),    // blood loss: dried blood
+    IM_COL32(124, 112, 130, 255),  // death blight: ashen violet
+    IM_COL32(146, 178, 194, 255),  // frostbite: pale ice
+    IM_COL32(126, 116, 166, 255),  // sleep: dusk lavender
+    IM_COL32(200, 150, 62, 255),   // madness: tarnished amber
+};
+
+ImU32 WithAlpha(ImU32 c, float a) {
+    return (c & ~IM_COL32_A_MASK) | (static_cast<ImU32>(std::clamp(a, 0.0f, 1.0f) * 255.0f) << IM_COL32_A_SHIFT);
+}
+
+// `c` scaled towards black (k < 1) or white (k > 1).
+ImU32 Shade(ImU32 c, float k, float alpha) {
+    auto ch = [&](int shift) {
+        const float v = static_cast<float>((c >> shift) & 0xFF);
+        return static_cast<int>(std::clamp(k <= 1.0f ? v * k : v + (255.0f - v) * (k - 1.0f), 0.0f, 255.0f));
+    };
+    return Rgba(ch(IM_COL32_R_SHIFT), ch(IM_COL32_G_SHIFT), ch(IM_COL32_B_SHIFT), alpha);
+}
+
+const ImU32 kFrameGold = IM_COL32(190, 160, 100, 255);
+
+// The symbol of a status, `u` = its radius. `hole` is the colour used to cut shapes out.
+void StatusGlyph(ImDrawList* dl, int status, ImVec2 c, float u, ImU32 col, ImU32 hole) {
+    const float line = std::max(1.0f, u * 0.26f);
+    switch (status) {
+        case game::kBloodLoss:  // drop
+            dl->AddCircleFilled(ImVec2(c.x, c.y + u * 0.35f), u * 0.62f, col, 16);
+            dl->AddTriangleFilled(ImVec2(c.x, c.y - u), ImVec2(c.x - u * 0.6f, c.y + u * 0.2f),
+                                  ImVec2(c.x + u * 0.6f, c.y + u * 0.2f), col);
+            break;
+        case game::kFrostbite:  // snowflake
+            for (int k = 0; k < 3; ++k) {
+                const float a = 3.14159265f * (0.5f + k / 3.0f);
+                const ImVec2 d(std::cos(a) * u, std::sin(a) * u);
+                dl->AddLine(ImVec2(c.x - d.x, c.y - d.y), ImVec2(c.x + d.x, c.y + d.y), col, line);
+            }
+            break;
+        case game::kPoison:  // bubbles
+            dl->AddCircleFilled(ImVec2(c.x - u * 0.35f, c.y + u * 0.3f), u * 0.5f, col, 14);
+            dl->AddCircleFilled(ImVec2(c.x + u * 0.45f, c.y + u * 0.05f), u * 0.33f, col, 12);
+            dl->AddCircleFilled(ImVec2(c.x + u * 0.05f, c.y - u * 0.62f), u * 0.24f, col, 10);
+            break;
+        case game::kScarletRot:  // blotch with spores
+            dl->AddCircleFilled(c, u * 0.48f, col, 14);
+            for (int k = 0; k < 5; ++k) {
+                const float a = 3.14159265f * 2.0f * k / 5.0f - 1.57f;
+                dl->AddCircleFilled(ImVec2(c.x + std::cos(a) * u * 0.8f, c.y + std::sin(a) * u * 0.8f),
+                                    u * 0.2f, col, 8);
+            }
+            break;
+        case game::kSleep:  // crescent moon
+            dl->AddCircleFilled(c, u * 0.85f, col, 18);
+            dl->AddCircleFilled(ImVec2(c.x + u * 0.42f, c.y - u * 0.3f), u * 0.72f, hole, 18);
+            break;
+        case game::kMadness: {  // eye
+            const int n = 14;
+            ImVec2 pts[2 * n];
+            for (int k = 0; k < n; ++k) {
+                const float t = static_cast<float>(k) / (n - 1);
+                const float x = c.x - u + 2 * u * t;
+                const float h = u * 0.62f * std::sin(t * 3.14159265f);
+                pts[k] = ImVec2(x, c.y - h);
+                pts[2 * n - 1 - k] = ImVec2(x, c.y + h);
+            }
+            dl->AddConvexPolyFilled(pts, 2 * n, col);
+            dl->AddCircleFilled(c, u * 0.3f, hole, 10);
+            break;
+        }
+        case game::kDeathBlight:  // skull
+            dl->AddCircleFilled(ImVec2(c.x, c.y - u * 0.15f), u * 0.7f, col, 16);
+            dl->AddRectFilled(ImVec2(c.x - u * 0.38f, c.y + u * 0.3f), ImVec2(c.x + u * 0.38f, c.y + u * 0.8f),
+                              col, u * 0.1f);
+            dl->AddCircleFilled(ImVec2(c.x - u * 0.28f, c.y - u * 0.15f), u * 0.17f, hole, 8);
+            dl->AddCircleFilled(ImVec2(c.x + u * 0.28f, c.y - u * 0.15f), u * 0.17f, hole, 8);
+            break;
+    }
+}
+
+// Build-up icon: the symbol in its colour on a dark tile with a worn gold edge.
+void StatusIcon(ImDrawList* dl, int status, ImVec2 c, float r, float alpha) {
+    const ImU32 bg = Rgba(16, 14, 11, alpha * 0.85f);
+    dl->AddRectFilled(ImVec2(c.x - r, c.y - r), ImVec2(c.x + r, c.y + r), bg, r * 0.25f);
+    dl->AddRect(ImVec2(c.x - r, c.y - r), ImVec2(c.x + r, c.y + r), WithAlpha(kFrameGold, alpha * 0.5f),
+                r * 0.25f, 0, std::max(1.0f, r * 0.1f));
+    StatusGlyph(dl, status, c, r * 0.62f, Shade(kStatusColor[status], 1.1f, alpha), bg);
+}
+
+// The status is in effect: a tile filled with its colour, the symbol dark on it, a slow glow, and
+// the time left as a darkened sweep (clockwise from the top, like the game's cooldowns).
+void ActiveIcon(ImDrawList* dl, int status, ImVec2 c, float r, float left, float total, float alpha,
+                double now) {
+    const float pulse = 0.5f + 0.5f * static_cast<float>(std::sin(now * 4.0 + status));
+    dl->AddRectFilled(ImVec2(c.x - r * 1.35f, c.y - r * 1.35f), ImVec2(c.x + r * 1.35f, c.y + r * 1.35f),
+                      WithAlpha(kStatusColor[status], alpha * (0.10f + 0.12f * pulse)), r * 0.5f);
+    const ImU32 fill = Shade(kStatusColor[status], 0.9f, alpha * 0.95f);
+    dl->AddRectFilled(ImVec2(c.x - r, c.y - r), ImVec2(c.x + r, c.y + r), fill, r * 0.25f);
+    if (total > 0 && left > 0) {  // time used up so far, darkened
+        const float used = 1.0f - std::clamp(left / total, 0.0f, 1.0f);
+        if (used > 0.01f) {
+            dl->PushClipRect(ImVec2(c.x - r, c.y - r), ImVec2(c.x + r, c.y + r), true);
+            const float a0 = -1.5707963f, a1 = a0 + used * 6.2831853f;
+            dl->PathLineTo(c);
+            dl->PathArcTo(c, r * 1.5f, a0, a1, 24);
+            dl->PathFillConvex(Rgba(0, 0, 0, alpha * 0.35f));
+            dl->PopClipRect();
+        }
+    }
+    dl->AddRect(ImVec2(c.x - r, c.y - r), ImVec2(c.x + r, c.y + r),
+                WithAlpha(kFrameGold, alpha * (0.65f + 0.3f * pulse)), r * 0.25f, 0, std::max(1.0f, r * 0.14f));
+    StatusGlyph(dl, status, c, r * 0.62f, Rgba(22, 18, 14, alpha), fill);
+}
+
+// Under an enemy bar (`top` = centre of the block's top edge, `w` its width):
+//  - a row of icons for statuses in effect (poisoned, rotting, asleep...);
+//  - one row per status building up: icon on the left, bar on the right (like the game's meters).
+void StatusBlock(ImDrawList* dl, ImVec2 top, float w, float h, const game::Chr& c,
+                 const game::ActiveStatus& active, float alpha, double now) {
+    const float icon = h * 2.4f;
+    const float left = top.x - w * 0.5f;
+    float y = top.y;
+    if (active.mask) {
+        const float r = icon * 0.62f;
+        float x = left + r * 1.1f;
+        for (int i = 0; i < game::kStatusCount; ++i) {
+            if (!(active.mask & (1u << i))) continue;
+            ActiveIcon(dl, i, ImVec2(x, y + r * 1.15f), r, active.left[i], active.total[i], alpha, now);
+            x += r * 2.6f;
+        }
+        y += r * 2.3f + h * 0.6f;
+    }
+    for (int i = 0; i < game::kStatusCount; ++i) {
+        if (c.resistance[i] <= 0 || c.buildup[i] <= 0) continue;
+        const float ratio = std::clamp(static_cast<float>(c.buildup[i]) / c.resistance[i], 0.0f, 1.0f);
+        StatusIcon(dl, i, ImVec2(left + icon * 0.5f, y + icon * 0.5f), icon * 0.5f, alpha);
+        const ImVec2 a(left + icon + h * 0.8f, y + (icon - h) * 0.5f), b(top.x + w * 0.5f, a.y + h);
+        dl->AddRectFilled(ImVec2(a.x - 1, a.y - 1), ImVec2(b.x + 1, b.y + 1), Rgba(0, 0, 0, alpha * 0.55f));
+        dl->AddRectFilled(a, b, Rgba(26, 22, 17, alpha * 0.8f));
+        if (ratio > 0) {
+            const float x1 = a.x + (b.x - a.x) * ratio;
+            const ImU32 dark = Shade(kStatusColor[i], 0.55f, alpha), lit = Shade(kStatusColor[i], 1.0f, alpha);
+            dl->AddRectFilledMultiColor(a, ImVec2(x1, b.y), dark, lit, lit, dark);
+        }
+        dl->AddRect(ImVec2(a.x - 1, a.y - 1), ImVec2(b.x + 1, b.y + 1), WithAlpha(kFrameGold, alpha * 0.35f));
+        y += icon + h * 0.5f;
+    }
+}
+
+// `origin`: top-left of the list, or its bottom-left when it grows upwards.
+void DrawBuffs(ImDrawList* dl, const std::vector<buffs::Active>& list, float s, ImVec2 origin,
+               bool grow_up) {
     const float row = 30 * s;
     const float w = 230 * s;
-    float y = origin.y;
+    float y = grow_up ? origin.y - row : origin.y;
     for (const auto& b : list) {
         const float ratio = b.duration > 0 ? b.remaining / b.duration : 0;
         const bool ending = b.remaining < 10.0f;
@@ -165,8 +326,26 @@ void DrawBuffs(ImDrawList* dl, const std::vector<buffs::Active>& list, float s, 
         dl->AddRectFilled(ImVec2(origin.x, by), ImVec2(origin.x + w, by + 3 * s), Rgba(0, 0, 0, 0.5f));
         dl->AddRectFilled(ImVec2(origin.x, by), ImVec2(origin.x + w * ratio, by + 3 * s),
                           ending ? Rgba(230, 90, 60, 0.95f) : Rgba(214, 178, 96, 0.95f));
-        y += row;
+        y += grow_up ? -row : row;
     }
+}
+
+// Statuses in effect: the effect list is walked a few times per second, not every frame.
+void RefreshActive(Track& t, double now) {
+    if (now - t.active_read < 0.15) return;
+    t.active_read = now;
+    t.active = game::ReadActiveStatus(t.chr.ins);
+}
+
+// Centre of the focus bar.
+ImVec2 FocusPos(ImVec2 display) {
+    const auto& cfg = config::Get();
+    return ImVec2(display.x * cfg.hud_focus_x / 100.0f, display.y * cfg.hud_focus_y / 100.0f);
+}
+
+ImVec2 BuffOrigin(ImVec2 display) {
+    const auto& cfg = config::Get();
+    return ImVec2(display.x * cfg.hud_buffs_x / 100.0f, display.y * cfg.hud_buffs_y / 100.0f);
 }
 
 void DrawFps(ImDrawList* dl, float s) {
@@ -206,7 +385,8 @@ void Draw() {
     }
 
     // ---- gather ----
-    const bool want_enemies = cfg.hud_enemy_stagger || cfg.hud_enemy_hp || cfg.hud_focus_bar;
+    const bool want_enemies =
+        cfg.hud_enemy_stagger || cfg.hud_focus_bar;  // HP numbers / status bars go on these
     game::Chr me;
     const bool have_me = game::ReadChr(game::PlayerIns(), me);
     if (have_me) UpdateTrack(g_player, me, now);
@@ -256,7 +436,7 @@ void Draw() {
     const ImVec2 vo((display.x - vw) * 0.5f, (display.y - vh) * 0.5f);
 
     // ---- enemies ----
-    const Track* focus = nullptr;
+    Track* focus = nullptr;
     if (want_enemies) {
         for (auto& [ins, t] : g_tracks) {
             const game::Chr& c = t.chr;
@@ -276,17 +456,21 @@ void Draw() {
             const ImVec2 p(vo.x + scr[0], vo.y + scr[1]);
             const float fade = since < 6.0 ? 1.0f : std::max(0.35f, 1.0f - static_cast<float>(since - 6.0) / 10.0f);
             const float flash = now < t.broken_until ? static_cast<float>((t.broken_until - now) / 0.9) : 0.0f;
-            if (cfg.hud_enemy_stagger && c.sa_max > 1)
-                StanceBar(dl, p, 120 * s, 7 * s, t.shown, flash, fade);
+            if (!cfg.hud_enemy_stagger) continue;
+            if (c.sa_max > 1) StanceBar(dl, p, 120 * s, 7 * s, t.shown, flash, fade);
             if (cfg.hud_enemy_hp) {
                 const std::string hp = FormatHp(c.hp, c.max_hp);
                 Shadowed(dl, 15 * s, ImVec2(p.x, p.y - 22 * s), Rgba(240, 225, 205, fade), hp.c_str(), 0.5f);
+            }
+            if (cfg.hud_status) {
+                RefreshActive(t, now);
+                StatusBlock(dl, ImVec2(p.x, p.y + 8 * s), 120 * s, 5 * s, c, t.active, fade, now);
             }
         }
     }
     if (focus && cfg.hud_focus_bar) {
         const game::Chr& c = focus->chr;
-        const ImVec2 p(display.x * 0.5f, display.y * 0.115f);
+        const ImVec2 p = FocusPos(display);
         const float flash = now < focus->broken_until ? static_cast<float>((focus->broken_until - now) / 0.9) : 0.0f;
         if (c.sa_max > 1) StanceBar(dl, p, 520 * s, 11 * s, focus->shown, flash, 1.0f);
         if (cfg.hud_enemy_hp) {
@@ -299,6 +483,11 @@ void Draw() {
             else
                 std::snprintf(line, sizeof(line), "HP %s", FormatHp(c.hp, c.max_hp).c_str());
             Shadowed(dl, 16 * s, ImVec2(p.x, p.y + 22 * s), Rgba(236, 224, 200, 0.95f), line, 0.5f);
+        }
+        if (cfg.hud_status) {
+            RefreshActive(*focus, now);
+            StatusBlock(dl, ImVec2(p.x, p.y + (cfg.hud_enemy_hp ? 46 : 14) * s), 300 * s, 7 * s, c,
+                        focus->active, 1.0f, now);
         }
     }
 
@@ -321,7 +510,7 @@ void Draw() {
     // ---- buffs ----
     if (cfg.hud_buffs) {
         buffs::Update(cfg.hud_buffs_unnamed);
-        DrawBuffs(dl, buffs::List(), s, ImVec2(display.x * 0.022f, display.y * 0.215f));
+        DrawBuffs(dl, buffs::List(), s, BuffOrigin(display), cfg.hud_buffs_grow_up);
     }
 }
 
@@ -329,16 +518,37 @@ void DrawPreview() {
     const ImVec2 display = ImGui::GetIO().DisplaySize;
     const float s = display.y / 1080.0f * config::Get().hud_scale;
     ImDrawList* dl = ImGui::GetBackgroundDrawList();
-    StanceBar(dl, ImVec2(display.x * 0.5f, display.y * 0.115f), 520 * s, 11 * s, 0.72f, 0, 1);
-    HpBar(dl, ImVec2(display.x * 0.5f, display.y * 0.115f + 15 * s), 520 * s, 4 * s, 0.64f, 0.9f);
-    Shadowed(dl, 16 * s, ImVec2(display.x * 0.5f, display.y * 0.115f + 22 * s),
-             Rgba(236, 224, 200, 0.95f), i18n::T("HP 3840 / 6000     Stance 34 / 120"), 0.5f);
+    const auto& cfg = config::Get();
+    game::Chr sample;  // an enemy building up blood loss and frostbite
+    sample.resistance[game::kBloodLoss] = 300;
+    sample.buildup[game::kBloodLoss] = 210;
+    sample.resistance[game::kFrostbite] = 250;
+    sample.buildup[game::kFrostbite] = 90;
+    game::ActiveStatus sample_active;  // ... while poisoned
+    sample_active.mask = 1u << game::kPoison;
+    sample_active.left[game::kPoison] = 40;
+    sample_active.total[game::kPoison] = 90;
+    if (cfg.hud_focus_bar) {
+        const ImVec2 f = FocusPos(display);
+        StanceBar(dl, f, 520 * s, 11 * s, 0.72f, 0, 1);
+        if (cfg.hud_enemy_hp) {
+            HpBar(dl, ImVec2(f.x, f.y + 15 * s), 520 * s, 4 * s, 0.64f, 0.9f);
+            Shadowed(dl, 16 * s, ImVec2(f.x, f.y + 22 * s), Rgba(236, 224, 200, 0.95f),
+                     i18n::T("HP 3840 / 6000     Stance 34 / 120"), 0.5f);
+        }
+        if (cfg.hud_status)
+            StatusBlock(dl, ImVec2(f.x, f.y + (cfg.hud_enemy_hp ? 46 : 14) * s), 300 * s, 7 * s, sample,
+                        sample_active, 1.0f, Now());
+    }
     const float xs[3] = {0.30f, 0.45f, 0.62f};
     const float rs[3] = {0.15f, 0.55f, 0.95f};
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3 && cfg.hud_enemy_stagger; ++i) {
         const ImVec2 p(display.x * xs[i], display.y * 0.42f);
         StanceBar(dl, p, 120 * s, 7 * s, rs[i], i == 2 ? 0.5f : 0.0f, 1.0f);
-        Shadowed(dl, 15 * s, ImVec2(p.x, p.y - 22 * s), Rgba(240, 225, 205, 1), "812 / 1200", 0.5f);
+        if (cfg.hud_enemy_hp)
+            Shadowed(dl, 15 * s, ImVec2(p.x, p.y - 22 * s), Rgba(240, 225, 205, 1), "812 / 1200", 0.5f);
+        if (i == 1 && cfg.hud_status)
+            StatusBlock(dl, ImVec2(p.x, p.y + 8 * s), 120 * s, 5 * s, sample, sample_active, 1.0f, Now());
     }
     StanceBar(dl, ImVec2(display.x * 0.5f, display.y * 0.955f), 300 * s, 8 * s, 0.4f, 0, 1);
     auto name = [](const char* english) -> std::string {
@@ -352,7 +562,7 @@ void DrawPreview() {
                                        {0, name("Exalted Flesh"), 21.0f, 30.0f}};
     std::sort(list.begin(), list.end(),
               [](const buffs::Active& a, const buffs::Active& b) { return a.remaining < b.remaining; });
-    DrawBuffs(dl, list, s, ImVec2(display.x * 0.022f, display.y * 0.215f));
+    DrawBuffs(dl, list, s, BuffOrigin(display), config::Get().hud_buffs_grow_up);
 }
 
 }  // namespace zz::hud

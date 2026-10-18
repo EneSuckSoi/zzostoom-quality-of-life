@@ -11,11 +11,12 @@ Loaded by [Mod Engine 3](https://github.com/garyttierney/me3) as a DLL. Nothing 
 ## Features
 
 - **Camera**: distance, field of view, height, lock-on range and lock-on camera tilt. Applies to every camera in the game (on foot, on Torrent, boss arenas) and changes live.
-- **Stance bars**: Sekiro-style poise bars above the enemies you fight, a big focus bar for the enemy you hit last, your own poise bar, enemy HP numbers. Every part can be turned off.
-- **Buff timers**: remaining time of your active buffs (Golden Vow, Flame Grant Me Strength, crystal tears, boluses...), named in your language.
+- **Stance bars**: Sekiro-style poise bars above the enemies you fight, a big focus bar for the enemy you hit last (can be moved), your own poise bar, enemy HP numbers. Every part can be turned off.
+- **Status build-up**: an icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up, and a lit icon with the time left while the enemy is poisoned, rotting, frostbitten or asleep.
+- **Buff timers**: remaining time of your active buffs (Golden Vow, Flame Grant Me Strength, crystal tears, boluses, Ash of War buffs like Seppuku or War Cry...), named in your language. The list can be moved and can grow upwards.
 - **Instant roll**: Elden Ring rolls when you *release* the dodge button, because holding it means sprint. With this on you roll the moment you press; keep holding to sprint. Controller only, off on Torrent.
 - **Performance**: FPS unlock with an optional limit, higher refresh rate in exclusive fullscreen, FPS counter.
-- **Pause** the game (PAUSE key / R3 + Start) while you are alone in your world, and **mute in background** when you Alt-Tab.
+- **Pause** the game (PAUSE key / R3 + Start) with the game's own pause, while you are alone in your world, and **mute in background** when you Alt-Tab.
 - **10 languages**: English, Deutsch, Français, Español, Português (Brasil), Русский, 日本語, 한국어, 简体中文, Türkçe. Follows your Windows language on the first start.
 
 | | |
@@ -23,6 +24,7 @@ Loaded by [Mod Engine 3](https://github.com/garyttierney/me3) as a DLL. Nothing 
 | ![Camera](images/02_camera.png) | ![Controls](images/03_controls.png) |
 | ![Performance](images/04_performance.png) | ![Misc](images/05_misc.png) |
 | ![Settings](images/06_settings.png) | ![Japanese](images/07_languages_japanese.png) |
+| ![Status build-up](images/08_status_bars.png) | |
 
 ## Requirements
 
@@ -33,7 +35,7 @@ Loaded by [Mod Engine 3](https://github.com/garyttierney/me3) as a DLL. Nothing 
 
 ## Installation
 
-1. Close the game and download `zzostoom-quality-of-life-1.0.0.zip` from [Releases](https://github.com/EneSuckSoi/zzostoom-quality-of-life/releases/latest).
+1. Close the game and download `zzostoom-quality-of-life-1.1.0.zip` from [Releases](https://github.com/EneSuckSoi/zzostoom-quality-of-life/releases/latest).
 2. Copy `zzostoom_qol.dll` into your ME3 profile's mod folder, usually  
    `%LOCALAPPDATA%\garyttierney\me3\config\profiles\eldenring-mods\`
 3. Open the `.me3` profile you launch the game with (e.g. `eldenring-default.me3`) and add:
@@ -91,4 +93,4 @@ Game objects are found by their RTTI class names and code patterns, not fixed ad
 
 Free to use. You may share, modify or build on it **only if you credit "zzostoom" and link to this repository** (https://github.com/EneSuckSoi/zzostoom-quality-of-life). Selling it is not allowed. See [LICENSE](LICENSE).
 
-Made by **zzostoom**. Uses [Dear ImGui](https://github.com/ocornut/imgui) (MIT) and [MinHook](https://github.com/TsudaKageyu/minhook) (BSD 2-Clause), see [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt).
+Made by **zzostoom**. Uses [Dear ImGui](https://github.com/ocornut/imgui) (MIT) and [MinHook](https://github.com/TsudaKageyu/minhook) (BSD 2-Clause), see [THIRD_PARTY_NOTICES.txt](THIRD_PARTY_NOTICES.txt). The pause uses the same method as techiew's [PauseTheGame](https://github.com/techiew/EldenRingMods) (MIT): it switches on the game's own tutorial pause.

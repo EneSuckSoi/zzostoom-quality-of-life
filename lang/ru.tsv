@@ -115,7 +115,6 @@ restored	восстановлено
 ready	готово
 not in game	не в игре
 not available while other players are in your world	недоступно, пока в вашем мире другие игроки
-frame timer not found (game updated?)	таймер кадров не найден (игра обновилась?)
 paused	на паузе
 waiting	ожидание
 muted (game in background)	без звука (игра в фоне)
@@ -128,3 +127,17 @@ effect list empty	список эффектов пуст
 effect list not found	список эффектов не найден
 learning the effect list layout	изучение структуры списка эффектов
 Effect	Эффект
+Status build-up bars	Шкалы накопления статусов
+Buff list X	Список усилений X
+Position of the buff list, in percent of the screen width. Turn on Preview below to see it.	Положение списка усилений в процентах от ширины экрана. Включите предпросмотр ниже, чтобы увидеть его.
+Buff list Y	Список усилений Y
+Position of the buff list, in percent of the screen height (its top, or its bottom when it grows upwards).	Положение списка усилений в процентах от высоты экрана (его верх, или низ, если он растёт вверх).
+Grow upwards	Расти вверх
+New buffs are added above the first one instead of below it, so the list can sit at the bottom of the screen.	Новые усиления добавляются над первым, а не под ним, поэтому список можно разместить внизу экрана.
+Focus bar X	Шкала цели X
+Focus bar Y	Шкала цели Y
+Position of the focus bar's centre, in percent of the screen width. Turn on Preview below to see it.	Положение центра шкалы цели в процентах от ширины экрана. Включите предпросмотр ниже, чтобы увидеть её.
+Position of the focus bar, in percent of the screen height.	Положение шкалы цели в процентах от высоты экрана.
+On the enemy bars and the focus bar:	На шкалах врагов и шкале цели:
+An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	Значок и шкала под шкалами врагов, пока накапливаются кровотечение, обморожение, яд, алая гниль, сон, безумие или мертвенная порча. Показываются только накапливающиеся статусы.
+the game's pause code was not found (game updated?)	код паузы игры не найден (игра обновилась?)

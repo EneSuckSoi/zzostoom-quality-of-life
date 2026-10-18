@@ -71,6 +71,12 @@ std::vector<Field> Fields() {
         {L"hud", L"range", Type::kFloat, &c.hud_range},
         {L"hud", L"bar_height", Type::kFloat, &c.hud_bar_height},
         {L"hud", L"buffs_unnamed", Type::kBool, &c.hud_buffs_unnamed},
+        {L"hud", L"focus_x", Type::kFloat, &c.hud_focus_x},
+        {L"hud", L"focus_y", Type::kFloat, &c.hud_focus_y},
+        {L"hud", L"buffs_x", Type::kFloat, &c.hud_buffs_x},
+        {L"hud", L"buffs_y", Type::kFloat, &c.hud_buffs_y},
+        {L"hud", L"buffs_grow_up", Type::kBool, &c.hud_buffs_grow_up},
+        {L"hud", L"status", Type::kBool, &c.hud_status},
         {L"controls", L"instant_roll", Type::kBool, &c.instant_roll},
         {L"controls", L"roll_button", Type::kString, &c.roll_button},
         {L"controls", L"sprint_delay_ms", Type::kInt, &c.sprint_delay_ms},
@@ -153,6 +159,10 @@ void Load(const std::wstring& dll_dir) {
     c.hud_scale = std::clamp(c.hud_scale, 0.5f, 2.5f);
     c.hud_range = std::clamp(c.hud_range, 5.0f, 100.0f);
     c.hud_bar_height = std::clamp(c.hud_bar_height, 0.5f, 6.0f);
+    c.hud_focus_x = std::clamp(c.hud_focus_x, 0.0f, 100.0f);
+    c.hud_focus_y = std::clamp(c.hud_focus_y, 0.0f, 100.0f);
+    c.hud_buffs_x = std::clamp(c.hud_buffs_x, 0.0f, 100.0f);
+    c.hud_buffs_y = std::clamp(c.hud_buffs_y, 0.0f, 100.0f);
     c.sprint_delay_ms = std::clamp(c.sprint_delay_ms, 80, 1000);
     c.sprint_min_ms = std::clamp(c.sprint_min_ms, 0, 2000);
     Save();  // writes missing keys with their defaults

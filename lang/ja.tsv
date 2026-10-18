@@ -115,7 +115,6 @@ restored	元に戻しました
 ready	準備完了
 not in game	ゲーム中ではありません
 not available while other players are in your world	他のプレイヤーが世界にいる間は使えません
-frame timer not found (game updated?)	フレームタイマーが見つかりません（ゲームが更新された？）
 paused	ポーズ中
 waiting	待機中
 muted (game in background)	ミュート中（バックグラウンド）
@@ -128,3 +127,17 @@ effect list empty	効果リストが空です
 effect list not found	効果リストが見つかりません
 learning the effect list layout	効果リストの構造を解析中
 Effect	効果
+Status build-up bars	状態異常の蓄積ゲージ
+Buff list X	バフリスト X
+Position of the buff list, in percent of the screen width. Turn on Preview below to see it.	バフリストの位置（画面の幅に対する割合）。下のプレビューをオンにすると確認できます。
+Buff list Y	バフリスト Y
+Position of the buff list, in percent of the screen height (its top, or its bottom when it grows upwards).	バフリストの位置（画面の高さに対する割合）。上方向に伸ばす場合はリストの下端の位置です。
+Grow upwards	上方向に伸ばす
+New buffs are added above the first one instead of below it, so the list can sit at the bottom of the screen.	新しいバフを下ではなく上に追加します。リストを画面の下側に置けます。
+Focus bar X	注目ゲージ X
+Focus bar Y	注目ゲージ Y
+Position of the focus bar's centre, in percent of the screen width. Turn on Preview below to see it.	注目ゲージの中心の位置（画面の幅に対する割合）。下のプレビューをオンにすると確認できます。
+Position of the focus bar, in percent of the screen height.	注目ゲージの位置（画面の高さに対する割合）。
+On the enemy bars and the focus bar:	敵のゲージと注目ゲージに表示:
+An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	出血、冷気、毒、腐敗、睡眠、発狂、死の蓄積が始まると、敵のゲージの下にアイコンとゲージを表示します。蓄積中のものだけが表示されます。
+the game's pause code was not found (game updated?)	ゲームのポーズ処理が見つかりません（ゲームが更新された？）

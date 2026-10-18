@@ -115,7 +115,6 @@ restored	restaurado
 ready	listo
 not in game	no estás en el juego
 not available while other players are in your world	no disponible con otros jugadores en tu mundo
-frame timer not found (game updated?)	temporizador de fotogramas no encontrado (¿juego actualizado?)
 paused	en pausa
 waiting	esperando
 muted (game in background)	silenciado (juego en segundo plano)
@@ -128,3 +127,17 @@ effect list empty	lista de efectos vacía
 effect list not found	lista de efectos no encontrada
 learning the effect list layout	aprendiendo la estructura de la lista de efectos
 Effect	Efecto
+Status build-up bars	Barras de acumulación de estados
+Buff list X	Lista de mejoras X
+Position of the buff list, in percent of the screen width. Turn on Preview below to see it.	Posición de la lista de mejoras, en porcentaje del ancho de la pantalla. Activa la vista previa de abajo para verla.
+Buff list Y	Lista de mejoras Y
+Position of the buff list, in percent of the screen height (its top, or its bottom when it grows upwards).	Posición de la lista de mejoras, en porcentaje del alto de la pantalla (su parte superior, o la inferior si crece hacia arriba).
+Grow upwards	Crecer hacia arriba
+New buffs are added above the first one instead of below it, so the list can sit at the bottom of the screen.	Las nuevas mejoras se añaden encima de la primera en lugar de debajo, así la lista puede ir en la parte inferior de la pantalla.
+Focus bar X	Barra de objetivo X
+Focus bar Y	Barra de objetivo Y
+Position of the focus bar's centre, in percent of the screen width. Turn on Preview below to see it.	Posición del centro de la barra de objetivo, en porcentaje del ancho de la pantalla. Activa la vista previa de abajo para verla.
+Position of the focus bar, in percent of the screen height.	Posición de la barra de objetivo, en porcentaje del alto de la pantalla.
+On the enemy bars and the focus bar:	En las barras de enemigos y la barra de objetivo:
+An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	Un icono y una barra bajo las barras de enemigos mientras se acumula hemorragia, congelación, veneno, putrefacción escarlata, sueño, locura o plaga mortal. Solo se muestran los estados que se están acumulando.
+the game's pause code was not found (game updated?)	no se encontró el código de pausa del juego (¿juego actualizado?)

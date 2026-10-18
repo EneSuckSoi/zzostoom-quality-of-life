@@ -42,6 +42,12 @@ struct Config {
     float hud_range = 30.0f;         // metres
     float hud_bar_height = 2.1f;     // metres above an enemy's feet for its bar
     bool hud_buffs_unnamed = false;  // also list buffs without a known name
+    float hud_focus_x = 50.0f;       // focus bar centre, % of the screen width / height
+    float hud_focus_y = 11.5f;
+    float hud_buffs_x = 2.2f;        // buff list position, % of the screen width / height
+    float hud_buffs_y = 21.5f;       // (top of the list, or its bottom when it grows upwards)
+    bool hud_buffs_grow_up = false;  // new rows go above the first one
+    bool hud_status = true;          // enemy status build-up bars (blood loss, frostbite...)
 
     // Controls
     bool instant_roll = true;   // roll on press instead of on release

@@ -115,7 +115,6 @@ restored	已恢复
 ready	就绪
 not in game	不在游戏中
 not available while other players are in your world	有其他玩家在你的世界时不可用
-frame timer not found (game updated?)	未找到帧计时器（游戏已更新？）
 paused	已暂停
 waiting	等待中
 muted (game in background)	已静音（游戏在后台）
@@ -128,3 +127,17 @@ effect list empty	效果列表为空
 effect list not found	未找到效果列表
 learning the effect list layout	正在分析效果列表结构
 Effect	效果
+Status build-up bars	异常状态累积条
+Buff list X	增益列表 X
+Position of the buff list, in percent of the screen width. Turn on Preview below to see it.	增益列表的位置，以屏幕宽度的百分比表示。打开下方的预览即可查看。
+Buff list Y	增益列表 Y
+Position of the buff list, in percent of the screen height (its top, or its bottom when it grows upwards).	增益列表的位置，以屏幕高度的百分比表示（列表顶部；向上增长时为列表底部）。
+Grow upwards	向上增长
+New buffs are added above the first one instead of below it, so the list can sit at the bottom of the screen.	新的增益添加在第一个的上方而不是下方，这样列表可以放在屏幕底部。
+Focus bar X	焦点条 X
+Focus bar Y	焦点条 Y
+Position of the focus bar's centre, in percent of the screen width. Turn on Preview below to see it.	焦点条中心的位置，以屏幕宽度的百分比表示。打开下方的预览即可查看。
+Position of the focus bar, in percent of the screen height.	焦点条的位置，以屏幕高度的百分比表示。
+On the enemy bars and the focus bar:	显示在敌人架势条和焦点条上：
+An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	出血、冻伤、中毒、腐败、睡眠、发狂或死亡开始累积时，在敌人条下方显示图标和进度条。只显示正在累积的状态。
+the game's pause code was not found (game updated?)	未找到游戏的暂停代码（游戏已更新？）

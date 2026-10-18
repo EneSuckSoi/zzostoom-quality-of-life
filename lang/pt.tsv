@@ -115,7 +115,6 @@ restored	restaurado
 ready	pronto
 not in game	fora do jogo
 not available while other players are in your world	indisponível com outros jogadores no seu mundo
-frame timer not found (game updated?)	temporizador de quadros não encontrado (jogo atualizado?)
 paused	pausado
 waiting	aguardando
 muted (game in background)	silenciado (jogo em segundo plano)
@@ -128,3 +127,17 @@ effect list empty	lista de efeitos vazia
 effect list not found	lista de efeitos não encontrada
 learning the effect list layout	aprendendo a estrutura da lista de efeitos
 Effect	Efeito
+Status build-up bars	Barras de acúmulo de status
+Buff list X	Lista de buffs X
+Position of the buff list, in percent of the screen width. Turn on Preview below to see it.	Posição da lista de buffs, em porcentagem da largura da tela. Ligue a prévia abaixo para vê-la.
+Buff list Y	Lista de buffs Y
+Position of the buff list, in percent of the screen height (its top, or its bottom when it grows upwards).	Posição da lista de buffs, em porcentagem da altura da tela (o topo dela, ou a base quando ela cresce para cima).
+Grow upwards	Crescer para cima
+New buffs are added above the first one instead of below it, so the list can sit at the bottom of the screen.	Novos buffs entram acima do primeiro em vez de abaixo, assim a lista pode ficar na parte de baixo da tela.
+Focus bar X	Barra de foco X
+Focus bar Y	Barra de foco Y
+Position of the focus bar's centre, in percent of the screen width. Turn on Preview below to see it.	Posição do centro da barra de foco, em porcentagem da largura da tela. Ligue a prévia abaixo para vê-la.
+Position of the focus bar, in percent of the screen height.	Posição da barra de foco, em porcentagem da altura da tela.
+On the enemy bars and the focus bar:	Nas barras dos inimigos e na barra de foco:
+An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	Um ícone e uma barra sob as barras dos inimigos enquanto hemorragia, congelamento, veneno, podridão escarlate, sono, loucura ou praga da morte se acumulam. Só aparecem os status que estão acumulando.
+the game's pause code was not found (game updated?)	código de pausa do jogo não encontrado (jogo atualizado?)

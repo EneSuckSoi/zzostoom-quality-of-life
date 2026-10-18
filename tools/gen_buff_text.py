@@ -5,7 +5,9 @@
 The names come from the game's own item / spell text, which zzostoom cheat sheet already
 extracted for its item list (src/generated/item_db.cpp = English names in order,
 src/generated/game_text.cpp = the same list in each game language). A buff whose English name
-is not an item there keeps its English name. Turkish has no game text: English names are used.
+is not an item there keeps its English name. Weapon skill buffs ("Seppuku") are matched with the
+item "Ash of War: Seppuku" and the translated "Ash of War: " wrapper is cut off. Turkish has no
+game text: English names are used.
 Run after tools/extract_buffs.py.
 """
 import argparse
@@ -53,6 +55,29 @@ def main():
         per_lang[code] = c_strings(body)
         assert len(per_lang[code]) == len(english), (code, len(per_lang[code]), len(english))
 
+    # Each language wraps Ash of War names its own way ("Ash of War: X", "Cendre de guerre : X",
+    # "戦灰「X」"...): the wrapper is the text up to the first ":" / "「", the most common one wins.
+    aow = [i for i, n in enumerate(english) if n.startswith("Ash of War: ")]
+    head = re.compile(r"^(.*?(?:\s*[:：]\s*|「))")
+    wrapper = {}
+    for code, texts in per_lang.items():
+        heads = [m.group(1) for i in aow if texts[i] and (m := head.match(unescape(texts[i])))]
+        wrapper[code] = max(set(heads), key=heads.count) if heads else ""
+
+    def skill_name(code, name):
+        i = index_of.get("Ash of War: " + name)
+        if i is None or not per_lang[code][i]:
+            return None
+        text = unescape(per_lang[code][i])
+        prefix = wrapper[code]
+        if not prefix or not text.startswith(prefix):
+            return None  # unusual wording: keep the English name
+        text = text[len(prefix):]
+        if prefix.endswith("「") and text.endswith("」"):
+            text = text[:-1]
+        text = text.strip()
+        return text.replace("\\", "\\\\").replace('"', '\\"') or None
+
     buffs_src = open(os.path.join(ROOT, "src", "generated", "buff_db.cpp"), encoding="utf-8").read()
     buffs = [unescape(m.group(1)) for m in re.finditer(r'\{\d+, "((?:[^"\\]|\\.)*)"\}', buffs_src)]
 
@@ -67,8 +92,13 @@ def main():
         i = index_of.get(name)
         cells = ["nullptr"]  # English: kBuffNames
         for code in LANGS[1:]:
-            cells.append(cell(per_lang[code][i]) if code and i is not None else "nullptr")
-        found += i is not None
+            if not code:
+                cells.append("nullptr")
+            elif i is not None:
+                cells.append(cell(per_lang[code][i]))
+            else:
+                cells.append(cell(skill_name(code, name)))
+        found += i is not None or "Ash of War: " + name in index_of
         out.append("    {" + ", ".join(cells) + "},  // " + name)
     out += ["};", f"const int kBuffTextCount = {len(buffs)};", "", "}  // namespace zz::i18n", ""]
     dst = os.path.join(ROOT, "src", "generated", "buff_text.cpp")
@@ -76,7 +106,7 @@ def main():
         f.write("\n".join(out))
     print(f"{found} of {len(buffs)} buff names translated -> {dst}")
     for name in buffs:
-        if name not in index_of:
+        if name not in index_of and "Ash of War: " + name not in index_of:
             print("  English only:", name)
 
 

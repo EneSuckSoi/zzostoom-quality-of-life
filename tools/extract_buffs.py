@@ -10,11 +10,19 @@ Boiled Crab -> 500820 (60 s), Flame, Grant Me Strength -> 1605000):
   Bullet (any field)                           -> SpEffectParam or child Bullet (2 levels)
   SpEffectParam without icon (any field)       -> SpEffectParam with icon (1 level)
 Only effects with an icon and a duration are kept.
+
+Weapon skills (Ashes of War) apply their buffs from animations, not from params, so they are
+named with the community SpEffectParam names from Paramdex ("[Weapon] Seppuku - Damage/Bleed
+Buff" -> "Seppuku" when that is a skill name in ArtsName). Some of them have no icon in the game
+(Seppuku, Determination...): those are kept when the Paramdex name says "Buff".
+The Paramdex file is downloaded to tools/.cache on first use.
 """
 import argparse
 import os
+import re
 import struct
 import sys
+import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import souls_formats as sf  # noqa: E402
@@ -22,6 +30,19 @@ import souls_formats as sf  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODS = os.path.expandvars(r"%LOCALAPPDATA%\garyttierney\me3\config\profiles\eldenring-mods")
 GAME = r"E:\SteamLibrary\steamapps\common\ELDEN RING\Game"
+PARAMDEX_URL = "https://raw.githubusercontent.com/soulsmods/Paramdex/master/ER/Names/SpEffectParam.txt"
+
+
+def paramdex_names(path):
+    if not os.path.exists(path):
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        urllib.request.urlretrieve(PARAMDEX_URL, path)
+    out = {}
+    for line in open(path, encoding="utf-8"):
+        m = re.match(r"(\d+) (.*)", line.strip())
+        if m:
+            out[int(m.group(1))] = m.group(2)
+    return out
 
 
 def ints(param, data, rid):
@@ -33,6 +54,7 @@ def main():
     ap.add_argument("--regulation", default=os.path.join(MODS, "regulation.bin"))
     ap.add_argument("--msg", default=os.path.join(MODS, "msg", "engus", "item_dlc02.msgbnd.dcx"))
     ap.add_argument("--oodle", default=os.path.join(GAME, "oo2core_6_win64.dll"))
+    ap.add_argument("--paramdex", default=os.path.join(ROOT, "tools", ".cache", "SpEffectParam.txt"))
     a = ap.parse_args()
 
     reg = sf.read_bnd4(sf.dcx_decompress(sf.decrypt_regulation(open(a.regulation, "rb").read()),
@@ -115,6 +137,19 @@ def main():
                 add(effects_from_bullet(ref), name)
             elif ref in sp.rows:
                 add(effects_from_spe(ref), name)
+
+    # Weapon skills, named through Paramdex.
+    skills = set(names("ArtsName").values())
+    for i, pname in sorted(paramdex_names(a.paramdex).items()):
+        if i in found or i not in sp.rows or not pname.startswith("[Weapon] "):
+            continue
+        icon, _, endurance = struct.unpack_from("<iff", spd, sp.rows[i])
+        if endurance < 1 or (icon <= 0 and "Buff" not in pname):
+            continue
+        base = re.split(r" - | \(", pname[len("[Weapon] "):])[0]
+        skill = next((b for b in base.split("/") if b in skills), None)
+        if skill:
+            found[i] = skill
 
     rows = sorted(found.items())
     out_path = os.path.join(ROOT, "src", "generated", "buff_db.cpp")
