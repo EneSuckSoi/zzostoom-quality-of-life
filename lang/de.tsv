@@ -141,3 +141,5 @@ Position of the focus bar, in percent of the screen height.	Position des Fokusba
 On the enemy bars and the focus bar:	Auf den Gegnerbalken und dem Fokusbalken:
 An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	Ein Symbol und ein Balken unter den Gegnerbalken, solange sich Blutverlust, Erfrierung, Gift, Scharlachfäule, Schlaf, Wahnsinn oder Todesfäule aufbauen. Nur Zustände, die sich gerade aufbauen, werden gezeigt.
 the game's pause code was not found (game updated?)	Pausecode des Spiels nicht gefunden (Spiel aktualisiert?)
+Sideways	Seitlich
+Moves the camera to the right (or left, below 0) for an over-the-shoulder view. Aiming and lock-on are not affected. This part of the camera does not avoid walls, so keep it small in tight places.	Verschiebt die Kamera nach rechts (oder unter 0 nach links) für eine Schulterperspektive. Zielen und Anvisieren bleiben unverändert. Dieser Teil der Kamera weicht Wänden nicht aus, halte ihn in engen Räumen klein.

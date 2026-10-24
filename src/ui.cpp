@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "buffs.h"
+#include "camera_offset.h"
 #include "config.h"
 #include "features.h"
 #include "fps.h"
@@ -28,7 +29,7 @@ namespace {
 
 using i18n::T;
 
-constexpr const char* kModVersion = "1.1.0";
+constexpr const char* kModVersion = "1.2.0";
 
 const char* const kTabs[] = {"Camera", "Combat HUD", "Controls", "Performance", "Misc", "Settings"};
 constexpr int kTabCount = 6;
@@ -209,6 +210,12 @@ void DrawCameraTab() {
             "Added to the game's vertical field of view (48 deg on foot).");
     SliderF("Height", &c.cam_height, -0.8f, 1.2f, "%+.2f m", 0.0f,
             "Raises or lowers the point the camera looks at (1.45 m above the feet on foot).");
+    ImGui::BeginDisabled(!camera_offset::Installed());
+    SliderF("Sideways", &c.cam_side, -1.5f, 1.5f, "%+.2f m", 0.0f,
+            "Moves the camera to the right (or left, below 0) for an over-the-shoulder view. "
+            "Aiming and lock-on are not affected. This part of the camera does not avoid walls, "
+            "so keep it small in tight places.");
+    ImGui::EndDisabled();
     Separator("Lock-on");
     SliderF("Lock-on range", &c.lock_range, 0.6f, 2.5f, "x%.2f", 1.0f,
             "Distance at which you can lock on (15 m on foot, more for some bosses).");
@@ -217,6 +224,7 @@ void DrawCameraTab() {
             "level against tall bosses or enemies above / below you.");
     ImGui::EndDisabled();
     Status(params::CameraStatus(), params::CameraApplied());
+
 
     Separator("Also in the game's own settings");
     Wrapped("System > Camera Options has two switches for the camera fighting you:\n"

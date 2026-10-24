@@ -141,3 +141,5 @@ Position of the focus bar, in percent of the screen height.	Положение �
 On the enemy bars and the focus bar:	На шкалах врагов и шкале цели:
 An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	Значок и шкала под шкалами врагов, пока накапливаются кровотечение, обморожение, яд, алая гниль, сон, безумие или мертвенная порча. Показываются только накапливающиеся статусы.
 the game's pause code was not found (game updated?)	код паузы игры не найден (игра обновилась?)
+Sideways	Сдвиг вбок
+Moves the camera to the right (or left, below 0) for an over-the-shoulder view. Aiming and lock-on are not affected. This part of the camera does not avoid walls, so keep it small in tight places.	Сдвигает камеру вправо (или влево при значении ниже 0) для вида из-за плеча. Прицеливание и захват цели не меняются. Этот сдвиг не учитывает стены, поэтому в тесных местах держите его небольшим.

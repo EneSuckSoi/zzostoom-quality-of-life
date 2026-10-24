@@ -141,3 +141,5 @@ Position of the focus bar, in percent of the screen height.	焦点条的位置�
 On the enemy bars and the focus bar:	显示在敌人架势条和焦点条上：
 An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	出血、冻伤、中毒、腐败、睡眠、发狂或死亡开始累积时，在敌人条下方显示图标和进度条。只显示正在累积的状态。
 the game's pause code was not found (game updated?)	未找到游戏的暂停代码（游戏已更新？）
+Sideways	左右偏移
+Moves the camera to the right (or left, below 0) for an over-the-shoulder view. Aiming and lock-on are not affected. This part of the camera does not avoid walls, so keep it small in tight places.	将镜头向右（小于 0 时向左）移动，形成越肩视角。瞄准和锁定不受影响。这部分偏移不会避开墙壁，在狭窄地方请设小一点。

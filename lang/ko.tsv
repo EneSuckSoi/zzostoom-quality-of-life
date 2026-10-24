@@ -141,3 +141,5 @@ Position of the focus bar, in percent of the screen height.	주목 게이지의 
 On the enemy bars and the focus bar:	적 게이지와 주목 게이지에 표시:
 An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	출혈, 냉기, 독, 부패, 수면, 발광, 즉사가 축적되는 동안 적 게이지 아래에 아이콘과 게이지를 표시합니다. 축적 중인 상태만 표시됩니다.
 the game's pause code was not found (game updated?)	게임의 일시정지 코드를 찾지 못함(게임이 업데이트됨?)
+Sideways	좌우
+Moves the camera to the right (or left, below 0) for an over-the-shoulder view. Aiming and lock-on are not affected. This part of the camera does not avoid walls, so keep it small in tight places.	어깨 너머 시점을 위해 카메라를 오른쪽으로(0 미만이면 왼쪽으로) 옮깁니다. 조준과 록온에는 영향이 없습니다. 이 이동은 벽을 피하지 않으니 좁은 곳에서는 작게 두세요.

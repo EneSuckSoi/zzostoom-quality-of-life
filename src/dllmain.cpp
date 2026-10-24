@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "camera_offset.h"
 #include "config.h"
 #include "features.h"
 #include "fps.h"
@@ -73,6 +74,7 @@ DWORD WINAPI MainThread(LPVOID) {
     const ULONGLONG window_time = GetTickCount64();
     Sleep(1500);
     zz::game::Init();
+    zz::camera_offset::Install();
 
     // Other overlays (zzostoom cheat sheet, the minimap) hook the same DXGI functions a moment
     // after the window appears; installing ours a few seconds later keeps the hooks from racing.

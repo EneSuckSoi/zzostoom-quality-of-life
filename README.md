@@ -10,7 +10,7 @@ Loaded by [Mod Engine 3](https://github.com/garyttierney/me3) as a DLL. Nothing 
 
 ## Features
 
-- **Camera**: distance, field of view, height, lock-on range and lock-on camera tilt. Applies to every camera in the game (on foot, on Torrent, boss arenas) and changes live.
+- **Camera**: distance, field of view, height, sideways offset (over-the-shoulder), lock-on range and lock-on camera tilt. Applies to every camera in the game (on foot, on Torrent, boss arenas) and changes live.
 - **Stance bars**: Sekiro-style poise bars above the enemies you fight, a big focus bar for the enemy you hit last (can be moved), your own poise bar, enemy HP numbers. Every part can be turned off.
 - **Status build-up**: an icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up, and a lit icon with the time left while the enemy is poisoned, rotting, frostbitten or asleep.
 - **Buff timers**: remaining time of your active buffs (Golden Vow, Flame Grant Me Strength, crystal tears, boluses, Ash of War buffs like Seppuku or War Cry...), named in your language. The list can be moved and can grow upwards.
@@ -28,14 +28,14 @@ Loaded by [Mod Engine 3](https://github.com/garyttierney/me3) as a DLL. Nothing 
 
 ## Requirements
 
-- Elden Ring **1.17.1** (Steam, `eldenring.exe` 2.7.1.0)
+- Elden Ring on Steam, tested with `eldenring.exe` 2.7.1.0 and 2.7.2.0
 - [Mod Engine 3](https://github.com/garyttierney/me3) (Mod Engine 2 works too)
 - Windows 10/11, DirectX 12
 - Optional: Seamless Co-op
 
 ## Installation
 
-1. Close the game and download `zzostoom-quality-of-life-1.1.0.zip` from [Releases](https://github.com/EneSuckSoi/zzostoom-quality-of-life/releases/latest).
+1. Close the game and download `zzostoom-quality-of-life-1.2.0.zip` from [Releases](https://github.com/EneSuckSoi/zzostoom-quality-of-life/releases/latest).
 2. Copy `zzostoom_qol.dll` into your ME3 profile's mod folder, usually  
    `%LOCALAPPDATA%\garyttierney\me3\config\profiles\eldenring-mods\`
 3. Open the `.me3` profile you launch the game with (e.g. `eldenring-default.me3`) and add:

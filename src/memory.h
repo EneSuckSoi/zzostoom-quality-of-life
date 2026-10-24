@@ -59,5 +59,8 @@ std::string RttiName(uintptr_t object);
 std::string RttiNameOfVtable(uintptr_t vtable);
 // True if the class of `vtable` is `base` or derives from it (RTTI class hierarchy).
 bool RttiHasBase(uintptr_t vtable, const char* base);
+// The vtable of a class by its mangled RTTI name without ".?AV" / "@@", e.g. "ChrExFollowCam@CS"
+// (the primary vtable, offset 0). 0 if not found. Scans the image: call once, not per frame.
+uintptr_t FindVtable(const char* mangled);
 
 }  // namespace zz::mem

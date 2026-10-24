@@ -23,6 +23,7 @@ struct Config {
     float cam_distance = 1.0f;  // x the game's distance behind the character
     float cam_fov = 0.0f;       // degrees added to the game's vertical field of view
     float cam_height = 0.0f;    // metres added to the point the camera looks at
+    float cam_side = 0.0f;      // metres the camera is moved to the right (< 0: left)
     float lock_range = 1.0f;    // x the distance at which lock-on can be acquired / kept
     float lock_tilt = 1.0f;     // x how much the camera tilts toward a locked target
 

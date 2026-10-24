@@ -141,3 +141,5 @@ Position of the focus bar, in percent of the screen height.	Posición de la barr
 On the enemy bars and the focus bar:	En las barras de enemigos y la barra de objetivo:
 An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	Un icono y una barra bajo las barras de enemigos mientras se acumula hemorragia, congelación, veneno, putrefacción escarlata, sueño, locura o plaga mortal. Solo se muestran los estados que se están acumulando.
 the game's pause code was not found (game updated?)	no se encontró el código de pausa del juego (¿juego actualizado?)
+Sideways	Lateral
+Moves the camera to the right (or left, below 0) for an over-the-shoulder view. Aiming and lock-on are not affected. This part of the camera does not avoid walls, so keep it small in tight places.	Mueve la cámara a la derecha (o a la izquierda, por debajo de 0) para una vista sobre el hombro. Apuntar y fijar objetivo no cambian. Esta parte de la cámara no esquiva paredes, así que mantenla pequeña en sitios estrechos.

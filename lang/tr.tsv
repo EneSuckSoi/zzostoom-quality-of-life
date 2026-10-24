@@ -141,3 +141,5 @@ Position of the focus bar, in percent of the screen height.	Odak barının konum
 On the enemy bars and the focus bar:	Düşman barlarında ve odak barında:
 An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	Kanama, donma, zehir, kızıl çürüme, uyku, delilik veya ölüm lekesi birikirken düşman barlarının altında bir ikon ve bir bar gösterir. Sadece birikmekte olan durumlar görünür.
 the game's pause code was not found (game updated?)	oyunun duraklatma kodu bulunamadı (oyun güncellendi mi?)
+Sideways	Yana kaydırma
+Moves the camera to the right (or left, below 0) for an over-the-shoulder view. Aiming and lock-on are not affected. This part of the camera does not avoid walls, so keep it small in tight places.	Omuz üstü görünüm için kamerayı sağa (0'ın altında sola) kaydırır. Nişan alma ve kilitlenme etkilenmez. Bu kaydırma duvarlardan kaçınmaz; dar yerlerde küçük tut.

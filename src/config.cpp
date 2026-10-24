@@ -56,6 +56,7 @@ std::vector<Field> Fields() {
         {L"camera", L"distance", Type::kFloat, &c.cam_distance},
         {L"camera", L"fov_add", Type::kFloat, &c.cam_fov},
         {L"camera", L"height_add", Type::kFloat, &c.cam_height},
+        {L"camera", L"side", Type::kFloat, &c.cam_side},
         {L"camera", L"lock_range", Type::kFloat, &c.lock_range},
         {L"camera", L"lock_tilt", Type::kFloat, &c.lock_tilt},
         {L"fps", L"unlock", Type::kBool, &c.fps_unlock},
@@ -152,6 +153,7 @@ void Load(const std::wstring& dll_dir) {
     c.cam_distance = std::clamp(c.cam_distance, 0.3f, 3.0f);
     c.cam_fov = std::clamp(c.cam_fov, -20.0f, 50.0f);
     c.cam_height = std::clamp(c.cam_height, -1.0f, 1.5f);
+    c.cam_side = std::clamp(c.cam_side, -1.5f, 1.5f);
     c.lock_range = std::clamp(c.lock_range, 0.5f, 3.0f);
     c.lock_tilt = std::clamp(c.lock_tilt, 0.0f, 2.0f);
     c.fps_limit = std::clamp(c.fps_limit, 0, 1000);

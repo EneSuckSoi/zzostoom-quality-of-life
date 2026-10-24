@@ -141,3 +141,5 @@ Position of the focus bar, in percent of the screen height.	注目ゲージの�
 On the enemy bars and the focus bar:	敵のゲージと注目ゲージに表示:
 An icon and a bar under the enemy bars while blood loss, frostbite, poison, scarlet rot, sleep, madness or death blight builds up. Only statuses that are building up are shown.	出血、冷気、毒、腐敗、睡眠、発狂、死の蓄積が始まると、敵のゲージの下にアイコンとゲージを表示します。蓄積中のものだけが表示されます。
 the game's pause code was not found (game updated?)	ゲームのポーズ処理が見つかりません（ゲームが更新された？）
+Sideways	左右
+Moves the camera to the right (or left, below 0) for an over-the-shoulder view. Aiming and lock-on are not affected. This part of the camera does not avoid walls, so keep it small in tight places.	肩越し視点のためにカメラを右へ（0未満なら左へ）ずらします。照準とロックオンには影響しません。このずれは壁を避けないので、狭い場所では小さめにしてください。

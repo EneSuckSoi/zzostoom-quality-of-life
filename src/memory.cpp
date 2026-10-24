@@ -233,6 +233,56 @@ bool RttiHasBase(uintptr_t vtable, const char* base) {
     return false;
 }
 
+uintptr_t FindVtable(const char* mangled) {
+    const Module module = MainModule();
+    auto dos = reinterpret_cast<const IMAGE_DOS_HEADER*>(module.base);
+    auto nt = reinterpret_cast<const IMAGE_NT_HEADERS64*>(module.base + dos->e_lfanew);
+    struct Range {
+        const uint8_t* start;
+        size_t len;
+        bool exec;
+    };
+    std::vector<Range> sections;
+    auto section = IMAGE_FIRST_SECTION(nt);
+    for (unsigned i = 0; i < nt->FileHeader.NumberOfSections; ++i, ++section)
+        sections.push_back({reinterpret_cast<const uint8_t*>(module.base + section->VirtualAddress),
+                            section->Misc.VirtualSize,
+                            (section->Characteristics & IMAGE_SCN_MEM_EXECUTE) != 0});
+    auto find_all = [&](const void* needle, size_t n, bool data_only,
+                        const std::function<bool(const uint8_t*)>& hit) {
+        for (const Range& r : sections) {
+            if (data_only && r.exec) continue;
+            for (const uint8_t* p = r.start; r.len >= n && p <= r.start + r.len - n; ++p) {
+                p = static_cast<const uint8_t*>(
+                    std::memchr(p, *static_cast<const uint8_t*>(needle), r.start + r.len - n + 1 - p));
+                if (!p) break;
+                if (std::memcmp(p, needle, n) == 0 && !hit(p)) return;
+            }
+        }
+    };
+    // TypeDescriptor {vtable, spare, ".?AVName@@"} -> CompleteObjectLocator {1, 0, cd, td RVA, ...}
+    // -> vtable[-1] = &COL.
+    const std::string name = std::string(".?AV") + mangled + "@@";
+    uintptr_t result = 0;
+    find_all(name.c_str(), name.size() + 1, true, [&](const uint8_t* td) {
+        const uint32_t td_rva = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(td) - 0x10 - module.base);
+        find_all(&td_rva, 4, true, [&](const uint8_t* p) {
+            const uint8_t* col = p - 12;
+            uint32_t head[3];
+            std::memcpy(head, col, sizeof(head));
+            if (head[0] != 1 || head[1] != 0) return true;
+            const uintptr_t col_va = reinterpret_cast<uintptr_t>(col);
+            find_all(&col_va, 8, true, [&](const uint8_t* slot) {
+                result = reinterpret_cast<uintptr_t>(slot) + 8;
+                return false;
+            });
+            return result == 0;
+        });
+        return result == 0;
+    });
+    return result;
+}
+
 std::string RttiName(uintptr_t object) {
     if (!object) return {};
     return RttiNameOfVtable(ReadPtr(object));
